@@ -70,6 +70,21 @@ export const compareProductAestheticsSchema = {
   additionalProperties: false,
 } as const;
 
+export const highlightVisualDifferenceSchema = {
+  type: "object",
+  properties: {
+    productIds: {
+      type: "array",
+      items: { type: "string" },
+      minItems: 2,
+      maxItems: 2,
+      description: "Exactly 2 product slugs to compare visually.",
+    },
+  },
+  required: ["productIds"],
+  additionalProperties: false,
+} as const;
+
 export const matchToUserPhotoSchema = {
   type: "object",
   properties: {

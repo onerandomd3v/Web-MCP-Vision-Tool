@@ -14,9 +14,9 @@ export function CatalogPage() {
 
   return (
     <div>
-      <h1 className="mb-2 text-3xl font-bold">Espresso machines &amp; gear</h1>
+      <h1 className="mb-2 text-3xl font-bold">Find what fits your space</h1>
       <p className="mb-6 text-stone-500">
-        Real machines, researched specs — compare before you buy.
+        Explore products with structured facts, then ask for a visual opinion when it matters.
       </p>
 
       <UserPhotoPanel />

@@ -37,6 +37,7 @@ import {
   getProductDetailsSchema,
   getProductImageSchema,
   highlightDifferencesSchema,
+  highlightVisualDifferenceSchema,
   matchToUserPhotoSchema,
   pickBestFitSchema,
   removeFromCartSchema,
@@ -169,7 +170,7 @@ export function WebMCPTools() {
       name: "highlightVisualDifference",
       description:
         "Return two targeted product images for a multimodal agent to describe visual differences such as finish, color, and shape. This is distinct from the structured spec highlight tool.",
-      inputSchema: compareProductAestheticsSchema,
+      inputSchema: highlightVisualDifferenceSchema,
       annotations: readOnly,
       execute: async (args: { productIds: string[] }) => {
         const products = await getProducts({});
@@ -384,7 +385,7 @@ export function WebMCPTools() {
   return (
     <div className="fixed bottom-3 right-3 z-50 flex items-center gap-2">
       <a
-        href="https://github.com/vincanger/webmcp-espresso-store"
+        href="https://github.com/onerandomd3v/Web-MCP-Vision-Tool"
         target="_blank"
         rel="noreferrer noopener"
         aria-label="View the source on GitHub"
