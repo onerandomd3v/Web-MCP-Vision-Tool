@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getProducts, useQuery } from "wasp/client/operations";
 import { CATEGORY_LABELS } from "../shared/format";
 import { ProductCard } from "./ProductCard";
+import { UserPhotoPanel } from "../vision/UserPhotoPanel";
 
 const CATEGORIES = Object.keys(CATEGORY_LABELS);
 
@@ -17,6 +18,8 @@ export function CatalogPage() {
       <p className="mb-6 text-stone-500">
         Real machines, researched specs — compare before you buy.
       </p>
+
+      <UserPhotoPanel />
 
       <div className="mb-6 flex flex-wrap gap-2">
         <Chip active={!category} onClick={() => setCategory(null)}>

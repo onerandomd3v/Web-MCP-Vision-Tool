@@ -42,6 +42,72 @@ export const getProductDetailsSchema = {
   additionalProperties: false,
 } as const;
 
+export const getProductImageSchema = {
+  type: "object",
+  properties: {
+    productId: {
+      type: "string",
+      description:
+        "Product slug returned by search_products. Used to retrieve one targeted image for visual evaluation.",
+    },
+  },
+  required: ["productId"],
+  additionalProperties: false,
+} as const;
+
+export const compareProductAestheticsSchema = {
+  type: "object",
+  properties: {
+    productIds: {
+      type: "array",
+      items: { type: "string" },
+      minItems: 2,
+      maxItems: 3,
+      description: "2–3 product slugs to compare visually.",
+    },
+  },
+  required: ["productIds"],
+  additionalProperties: false,
+} as const;
+
+export const matchToUserPhotoSchema = {
+  type: "object",
+  properties: {
+    photoUrl: {
+      type: "string",
+      description: "The user photo URL supplied by the photo upload panel.",
+    },
+    category: {
+      type: "string",
+      enum: [...CATEGORY_ENUM],
+      description: "Optional catalog category to narrow visual candidates.",
+    },
+  },
+  required: ["photoUrl"],
+  additionalProperties: false,
+} as const;
+
+export const pickBestFitSchema = {
+  type: "object",
+  properties: {
+    productIds: {
+      type: "array",
+      items: { type: "string" },
+      minItems: 2,
+      maxItems: 3,
+      description: "2–3 candidate product slugs.",
+    },
+    userPreference: {
+      type: "string",
+      minLength: 1,
+      maxLength: 500,
+      description: "The user's visual preference for the multimodal agent.",
+    },
+  },
+  required: ["productIds", "userPreference"],
+  additionalProperties: false,
+} as const;
+
 export const compareProductsSchema = {
   type: "object",
   properties: {

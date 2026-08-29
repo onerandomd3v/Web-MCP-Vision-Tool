@@ -26,19 +26,30 @@ import { celebrateOrder } from "../cart/celebrate";
 import { useHighlightStore } from "../compare/highlightStore";
 import { navigateRef } from "../navigation";
 import { MACHINE_SPEC_KEY_NAMES } from "../shared/machineSpecKeys";
+import { getUserPhotoUrl } from "../vision/userPhoto";
 import {
   addToCartSchema,
   applyCouponSchema,
   checkCompatibilitySchema,
+  compareProductAestheticsSchema,
   compareProductsSchema,
   emptySchema,
   getProductDetailsSchema,
+  getProductImageSchema,
   highlightDifferencesSchema,
+  matchToUserPhotoSchema,
+  pickBestFitSchema,
   removeFromCartSchema,
   searchProductsSchema,
   setCompareListSchema,
   updateCartQuantitySchema,
 } from "./schemas";
+import {
+  buildBestFitContext,
+  buildPhotoMatchResult,
+  selectVisionProducts,
+  toProductImageResult,
+} from "./visionTools";
 
 // use-webmcp-tool aborts the browser's async registerTool() on unmount
 // (StrictMode double-mounts, `enabled` flips), and Chrome rejects that promise
@@ -64,6 +75,11 @@ const mutating = { readOnlyHint: false };
 const TOOL_META: Array<{ name: string; auth: boolean; writes: boolean }> = [
   { name: "search_products", auth: false, writes: false },
   { name: "get_product_details", auth: false, writes: false },
+  { name: "getProductImage", auth: false, writes: false },
+  { name: "compareProductAesthetics", auth: false, writes: false },
+  { name: "matchToUserPhoto", auth: false, writes: false },
+  { name: "highlightVisualDifference", auth: false, writes: false },
+  { name: "pickBestFit", auth: false, writes: false },
   { name: "compare_products", auth: false, writes: false },
   { name: "get_my_gear", auth: true, writes: false },
   { name: "check_compatibility", auth: true, writes: false },
@@ -108,6 +124,73 @@ export function WebMCPTools() {
       inputSchema: getProductDetailsSchema,
       annotations: readOnly,
       execute: (args: { slug: string }) => getProduct({ slug: args.slug }),
+    }),
+
+    useWebMCP({
+      name: "getProductImage",
+      description:
+        "Get one targeted product image for visual evaluation. Use this only when a user asks how a product looks, matches a style or space, or needs a visual opinion; it does not return a page screenshot.",
+      inputSchema: getProductImageSchema,
+      annotations: readOnly,
+      execute: async (args: { productId: string }) => {
+        const product = await getProduct({ slug: args.productId });
+        return toProductImageResult(product);
+      },
+    }),
+
+    useWebMCP({
+      name: "compareProductAesthetics",
+      description:
+        "Return targeted images for 2–3 products so a multimodal agent can compare their appearance. Use for visual questions, not specification comparisons.",
+      inputSchema: compareProductAestheticsSchema,
+      annotations: readOnly,
+      execute: async (args: { productIds: string[] }) => {
+        const products = await getProducts({});
+        return selectVisionProducts(products, args.productIds);
+      },
+    }),
+
+    useWebMCP({
+      name: "matchToUserPhoto",
+      description:
+        "Return product images alongside a user-provided photo URL so a multimodal agent can judge visual fit. The tool supplies context; it does not perform image reasoning itself.",
+      inputSchema: matchToUserPhotoSchema,
+      annotations: readOnly,
+      execute: async (args: { photoUrl: string; category?: string }) => {
+        const products = await getProducts(args.category ? { category: args.category } : {});
+        return buildPhotoMatchResult(
+          args.photoUrl || getUserPhotoUrl(),
+          selectVisionProducts(products, products.slice(0, 3).map((p) => p.slug), 1, 3),
+        );
+      },
+    }),
+
+    useWebMCP({
+      name: "highlightVisualDifference",
+      description:
+        "Return two targeted product images for a multimodal agent to describe visual differences such as finish, color, and shape. This is distinct from the structured spec highlight tool.",
+      inputSchema: compareProductAestheticsSchema,
+      annotations: readOnly,
+      execute: async (args: { productIds: string[] }) => {
+        const products = await getProducts({});
+        const images = selectVisionProducts(products, args.productIds, 2, 2);
+        return { products: images, instruction: "Compare the visible finish, color, shape, and proportions." };
+      },
+    }),
+
+    useWebMCP({
+      name: "pickBestFit",
+      description:
+        "Supply candidate product images and a visual preference to a multimodal agent for a recommendation. This tool does not claim to perform visual reasoning or place an order.",
+      inputSchema: pickBestFitSchema,
+      annotations: readOnly,
+      execute: async (args: { productIds: string[]; userPreference: string }) => {
+        const products = await getProducts({});
+        return buildBestFitContext(
+          selectVisionProducts(products, args.productIds),
+          args.userPreference,
+        );
+      },
     }),
 
     useWebMCP({
