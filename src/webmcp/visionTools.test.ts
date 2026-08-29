@@ -65,9 +65,10 @@ describe("vision result composition", () => {
       userPhoto: "blob:photo",
       candidates: candidate,
     });
-    expect(buildBestFitContext(candidate, "sleek and black").preference).toBe(
-      "sleek and black",
-    );
+    expect(buildBestFitContext(candidate, "sleek and black")).toMatchObject({
+      preference: "sleek and black",
+      recommendationPrompt: expect.stringContaining("sleek and black"),
+    });
     expect(() => buildPhotoMatchResult("", candidate)).toThrow();
     expect(() => buildBestFitContext(candidate, " ")).toThrow();
   });

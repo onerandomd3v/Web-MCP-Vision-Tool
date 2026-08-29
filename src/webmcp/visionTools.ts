@@ -72,6 +72,7 @@ export function buildBestFitContext(
   return {
     preference: userPreference.trim(),
     candidates,
+    recommendationPrompt: `Choose the best visual fit for: ${userPreference.trim()}. Explain the visible trade-offs using only the supplied candidate images.`,
     reasoning: "Use the candidate images and preference for multimodal visual reasoning.",
   };
 }
