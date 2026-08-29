@@ -32,11 +32,11 @@
 **Interfaces:**
 - Produces a clean branch and a recorded baseline for later comparisons.
 
-- [ ] Confirm the Codespace is on `dev` and the working tree is clean.
-- [ ] Run `wasp doctor`, `wasp db start`, `wasp db migrate-dev`, and `wasp compile`.
+- [x] Confirm the Codespace is on `dev` and the working tree is clean.
+- [x] Run `wasp doctor`, `wasp db start`, `wasp db migrate-dev`, and `wasp compile`.
 - [ ] Run `npm run test` if present, otherwise `npx vitest run` only for test execution.
-- [ ] Start the app with `wasp start`; verify the forwarded client and server ports are reachable.
-- [ ] Commit no generated artifacts unless already tracked; record any Codespaces URL-routing limitation in the PR notes.
+- [x] Start the app with `wasp start`; verify the forwarded client and server ports are reachable.
+- [x] Commit no generated artifacts unless already tracked; record any Codespaces URL-routing limitation in the PR notes.
 
 ### Task 2: Add the baseline `getProductImage` WebMCP tool
 
@@ -50,11 +50,11 @@
 - Consumes: existing product lookup/query and the product `imageUrl` field.
 - Produces: `{ productId, name, imageUrl }` for a valid product; a structured not-found error for an invalid ID.
 
-- [ ] Write tests for valid lookup, missing product, and an image URL that is not leaked when absent.
-- [ ] Register the tool with a description that explicitly says it is for visual evaluation and is not a general page screenshot.
-- [ ] Use the existing WebMCP hook and tool-registration conventions; do not create a second registration system.
-- [ ] Verify that ordinary search and product-detail calls do not include image payloads.
-- [ ] Run the focused tests and `wasp compile`, then commit `feat: add targeted product image tool`.
+- [x] Write tests for valid lookup, missing product, and an image URL that is not leaked when absent.
+- [x] Register the tool with a description that explicitly says it is for visual evaluation and is not a general page screenshot.
+- [x] Use the existing WebMCP hook and tool-registration conventions; do not create a second registration system.
+- [x] Verify that ordinary search and product-detail calls do not include image payloads.
+- [x] Run the focused tests and `wasp compile`, then commit `feat: add targeted product image tool`.
 
 ### Task 3: Add multi-product visual comparison tools
 
@@ -68,9 +68,9 @@
 - Consumes: product IDs and existing catalog data.
 - Produces: ordered `{ id, name, imageUrl }` candidates; visual-difference responses containing both product references and their images, distinct from the existing spec-based `highlight_differences` tool.
 
-- [ ] Test duplicate IDs, unknown IDs, empty arrays, and the maximum candidate count.
-- [ ] Implement stable ordering so the agent can compare products deterministically.
-- [ ] Keep the existing specification comparison tool unchanged and make the visual tool descriptions clearly distinguish image judgment from specs.
+- [x] Test duplicate IDs, unknown IDs, empty arrays, and the maximum candidate count.
+- [x] Implement stable ordering so the agent can compare products deterministically.
+- [x] Keep the existing specification comparison tool unchanged and make the visual tool descriptions clearly distinguish image judgment from specs.
 - [ ] Run focused tests, `wasp compile`, and a manual WebMCP inspection; commit `feat: add visual comparison tools`.
 
 ### Task 4: Build the user-photo upload and `matchToUserPhoto` flow
@@ -86,10 +86,10 @@
 - Consumes: a validated user photo URL and optional product category.
 - Produces: `{ userPhoto, candidates }`, where candidates are bounded product image references from the existing catalog.
 
-- [ ] Test file type/size rejection, successful preview, cleanup after removal, and no-photo tool errors.
-- [ ] Start with a temporary browser object URL for the local demo; isolate a future storage adapter so deployment storage can be added without changing the tool contract.
-- [ ] Add clear consent and removal copy; do not persist or transmit a photo until the user explicitly selects it.
-- [ ] Limit candidate count and reuse existing catalog filtering rather than duplicating product data.
+- [x] Test file type/size rejection, successful preview, cleanup after removal, and no-photo tool errors.
+- [x] Start with a temporary browser object URL for the local demo; isolate a future storage adapter so deployment storage can be added without changing the tool contract.
+- [x] Add clear consent and removal copy; do not persist or transmit a photo until the user explicitly selects it.
+- [x] Limit candidate count and reuse existing catalog filtering rather than duplicating product data.
 - [ ] Run `wasp compile`, Vitest, and a browser upload smoke test; commit `feat: add user photo matching flow`.
 
 ### Task 5: Add the higher-level `pickBestFit` tool and compose the demo flow
@@ -104,9 +104,9 @@
 - Consumes: candidate product IDs plus a natural-language visual preference.
 - Produces: candidate image references and a structured recommendation context; it must not claim that the server itself performed visual reasoning.
 
-- [ ] Test empty preferences, unknown products, duplicate products, and bounded candidate lists.
-- [ ] Describe the tool as supplying context to a multimodal agent, not as an image model or an autonomous checkout action.
-- [ ] Document the intended chain: structured search → image retrieval/comparison → visual recommendation → optional add-to-cart.
+- [x] Test empty preferences, unknown products, duplicate products, and bounded candidate lists.
+- [x] Describe the tool as supplying context to a multimodal agent, not as an image model or an autonomous checkout action.
+- [x] Document the intended chain: structured search → image retrieval/comparison → visual recommendation → optional add-to-cart.
 - [ ] Run all tests and `wasp compile`; commit `feat: compose visual recommendation flow`.
 
 ### Task 6: Rebrand the experience and make the visual tier discoverable
@@ -121,11 +121,11 @@
 - Consumes: completed vision tools and upload panel.
 - Produces: a coherent product experience that explains when image tools are used without encouraging screenshots for routine actions.
 
-- [ ] Remove remaining Crema/espresso-specific product-facing branding only after the tool flow works.
-- [ ] Keep factual starter attribution and the unresolved licensing note accurate.
-- [ ] Add an accessible visual-tools entry point and status/error states for unavailable images.
+- [x] Remove remaining Crema/espresso-specific product-facing branding only after the tool flow works.
+- [x] Keep factual starter attribution and the unresolved licensing note accurate.
+- [x] Add an accessible visual-tools entry point and status/error states for unavailable images.
 - [ ] Verify desktop/wide layout first, then responsive behavior; run `wasp compile` and browser smoke tests.
-- [ ] Commit `feat: rebrand WebMCP Vision experience`.
+- [x] Commit `feat: rebrand WebMCP Vision experience`.
 
 ### Task 7: Verify WebMCP behavior and Codespaces routing
 
