@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/img/products/:path*",
+      "destination": "https://raw.githubusercontent.com/onerandomd3v/Web-MCP-Vision-Tool/main/public/img/products/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/200.html"
+    }
+  ]
+}
