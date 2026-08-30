@@ -1,0 +1,14 @@
+{
+  "name": "WebMCP Vision",
+  "forwardPorts": [3000, 3001],
+  "portsAttributes": {
+    "3000": {
+      "label": "WebMCP Vision client",
+      "protocol": "https"
+    },
+    "3001": {
+      "label": "WebMCP Vision server",
+      "protocol": "https"
+    }
+  }
+}

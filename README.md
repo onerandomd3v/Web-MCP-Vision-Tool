@@ -56,7 +56,11 @@ wasp db migrate-dev
 wasp start
 ```
 
-The client normally runs on port 3000 and the server on port 3001. In Codespaces, forward both ports. If the forwarded client still calls `localhost:3001`, set `REACT_APP_API_URL` in a local `.env.client` file to the forwarded HTTPS address for port 3001, then restart Wasp. Never commit environment files or secrets.
+The client normally runs on port 3000 and the server on port 3001. The checked-in
+`.devcontainer/devcontainer.json` declares both forwards for Codespaces. If the
+forwarded client still calls `localhost:3001`, set `REACT_APP_API_URL` in a local
+`.env.client` file to the forwarded HTTPS address for port 3001, then restart Wasp.
+Never commit environment files or secrets.
 
 ## Verification and deployment
 
