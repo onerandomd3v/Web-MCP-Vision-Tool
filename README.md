@@ -72,23 +72,3 @@ From the repository root:
 wasp compile
 npm test
 ```
-
-The browser verification checklist is in [`docs/verification/webmcp-vision.md`](docs/verification/webmcp-vision.md). It covers structured-first tool selection, image retrieval, comparison, photo matching, and the explicit-checkout safety rule.
-
-## Deployment
-
-The client can be deployed to Vercel, the generated Node server to a Wasp-compatible host, and production PostgreSQL to Neon. Build and environment-variable instructions are in [`docs/deployment.md`](docs/deployment.md).
-
-The generated artifacts are:
-
-- Client: `.wasp/out/web-app/build/`
-- Server: `.wasp/out/server/bundle/server.js`
-
-Keep local Docker data and production database credentials separate.
-
-## Demo and contribution workflow
-
-The product demo sequence is in [`docs/demo-script.md`](docs/demo-script.md), and the submission copy is in [`devpost-submission.md`](devpost-submission.md).
-The final release and submission checklist is in [`docs/submission-checklist.md`](docs/submission-checklist.md).
-
-Create a focused branch from `dev`, run the verification commands, and open a pull request back to `dev`. `main` is reserved for tested releases.
