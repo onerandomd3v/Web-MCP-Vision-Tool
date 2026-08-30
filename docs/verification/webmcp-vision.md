@@ -24,6 +24,12 @@ development branch returned HTTP 200 for the client and HTTP 200 for
 browser `localhost:3001` failure while keeping the server port private. It is
 still a development preview, not a production deployment.
 
+The forwarded client origin was then made temporarily public for an external
+check. The client returned HTTP 200, and the same `POST /operations/get-products`
+request returned HTTP 200 with a product payload through the public origin.
+Codespaces port visibility is temporary and must not be used as the submission
+URL; repeat this check after deploying to a permanent host.
+
 ## WebMCP checks
 
 1. Enable the Chrome WebMCP flag and open the running client.
