@@ -36,6 +36,7 @@
   "scripts": {
     "build:client": "vite build",
     "build:server": "tsc -p tsconfig.server.json",
+    "dev": "vite",
     "start:server": "node dist/server/index.js",
     "test": "vitest run"
   }
