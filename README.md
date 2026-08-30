@@ -32,7 +32,7 @@ The first version will help a shopper move from an intent such as “find someth
 3. For room or style matching, the shopper can upload a photo of their own space.
 4. The agent compares the photo and candidate products, explains the visual trade-offs, and can continue with supported shopping actions.
 
-## Planned WebMCP tools
+## WebMCP vision tools
 
 | Tool | Purpose |
 | --- | --- |
@@ -42,7 +42,25 @@ The first version will help a shopper move from an intent such as “find someth
 | `highlightVisualDifference` | Provide the assets needed to explain visual differences such as finish, color, or form. |
 | `pickBestFit` | Support a visual recommendation using a shopper’s stated aesthetic preference. |
 
-These are planned capabilities. The current repository is the implementation starting point, not a claim that every tool is already available.
+The vision tools return focused image references and context. Visual reasoning is performed by the agent's multimodal model; the server does not pretend to be an image model. Existing structured tools remain the default for search, specifications, compatibility, cart, coupons, and checkout.
+
+## Local development
+
+Use the Linux Codespace or another Linux environment for Wasp:
+
+```bash
+npm install --global @wasp.sh/wasp-cli@0.25.0
+wasp doctor
+wasp db start
+wasp db migrate-dev
+wasp start
+```
+
+The client normally runs on port 3000 and the server on port 3001. In Codespaces, forward both ports. If the forwarded client still calls `localhost:3001`, set `REACT_APP_API_URL` in a local `.env.client` file to the forwarded HTTPS address for port 3001, then restart Wasp. Never commit environment files or secrets.
+
+## Verification and deployment
+
+The complete WebMCP test checklist is in [`docs/verification/webmcp-vision.md`](docs/verification/webmcp-vision.md). Production deployment guidance for a Vercel client, Wasp server host, and Neon Postgres is in [`docs/deployment.md`](docs/deployment.md). The planned recording sequence is in [`docs/demo-script.md`](docs/demo-script.md).
 
 ## Development direction
 
@@ -56,7 +74,7 @@ This project is being built for the WebMCP Challenge. The work will focus on:
 
 ## Repository workflow
 
-`dev` is the integration branch. Create a feature branch from `dev`, open a pull request back into `dev`, and use `main` only for production-ready releases.
+`dev` is the protected integration branch. Create a feature branch from `dev`, open a pull request back into `dev`, and use `main` only for production-ready releases. Both branches require a pull request review, linear history, resolved review threads, and reject force-pushes and deletions.
 
 ## Starter attribution
 
@@ -64,4 +82,4 @@ This repository began from the [webmcp-espresso-store](https://github.com/vincan
 
 ## Status
 
-Concept and implementation plan complete. Development is beginning with the WebMCP Vision tool layer and the visual-matching experience.
+The first vision tool layer, browser photo panel, deterministic demo scenarios, and automated Wasp/Postgres CI are implemented on the feature branch. The remaining gate is live WebMCP verification in Chrome, followed by deployment and the recorded demo.

@@ -30,7 +30,7 @@ import { demoReset, devSeed } from "./src/server/seed" with { type: "ref" };
 export default app({
   name: "webmcpEspresso",
   wasp: { version: "^0.25.0" },
-  title: "Crema & Co.",
+  title: "WebMCP Vision",
   head: ["<link rel='icon' href='/favicon.ico' />"],
   auth: {
     userEntity: "User",
