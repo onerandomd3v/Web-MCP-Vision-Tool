@@ -1,9 +1,8 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
-import { wasp } from "wasp/client/vite";
 
 export default defineConfig({
-  plugins: [wasp(), tailwindcss()],
+  plugins: [tailwindcss()],
   server: {
     open: false,
     // Codespaces exposes the browser client publicly, while the generated

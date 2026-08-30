@@ -1,10 +1,10 @@
 import { Link, useSearchParams } from "react-router";
-import { useAuth } from "wasp/client/auth";
+import { useAuth } from "../client/auth";
 import {
   compareProducts,
   getCompareList,
   useQuery,
-} from "wasp/client/operations";
+} from "../client/operations";
 import { CompareTable } from "./CompareTable";
 
 export function ComparePage() {

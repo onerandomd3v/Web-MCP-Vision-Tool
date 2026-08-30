@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getProducts, useQuery } from "wasp/client/operations";
+import { getProducts, useQuery } from "../client/operations";
 import { CATEGORY_LABELS } from "../shared/format";
 import { ProductCard } from "./ProductCard";
 import { UserPhotoPanel } from "../vision/UserPhotoPanel";

@@ -9,6 +9,8 @@ generator client {
 
 model User {
   id           Int           @id @default(autoincrement())
+  username     String?       @unique
+  passwordHash  String?
   displayName  String?
   region       String        @default("EU") // "EU" | "US" → voltage check
   orders       Order[]

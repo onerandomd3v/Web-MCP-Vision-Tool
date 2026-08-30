@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import {
   checkCompatibility,
   useQuery,
-} from "wasp/client/operations";
+} from "../client/operations";
 import { AddToCartButton } from "../cart/AddToCartButton";
 import { formatEur } from "../shared/format";
 import { useHighlightStore } from "./highlightStore";

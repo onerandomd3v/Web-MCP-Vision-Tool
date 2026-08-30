@@ -1,9 +1,9 @@
-import { useAuth } from "wasp/client/auth";
+import { useAuth } from "../client/auth";
 import {
   getCompareList,
   setCompareList,
   useQuery,
-} from "wasp/client/operations";
+} from "../client/operations";
 
 export function CompareToggle({ slug }: { slug: string }) {
   const { data: user } = useAuth();
