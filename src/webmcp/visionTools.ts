@@ -34,6 +34,9 @@ export function assertBoundedProductIds(
   if (ids.length !== productIds.length || ids.some((id) => id.trim() === "")) {
     throw new Error("productIds must contain non-empty strings only.");
   }
+  if (new Set(ids).size !== ids.length) {
+    throw new Error("productIds must not contain duplicates.");
+  }
   return ids;
 }
 

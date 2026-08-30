@@ -12,10 +12,10 @@ Set these as deployment secrets, never in Git:
 - `WASP_SERVER_URL`: public server URL.
 - Any provider credentials required by a future image-storage adapter.
 
-Run production migrations explicitly against the target database after reviewing the migration:
+Run production migrations explicitly against the target database after reviewing the migration. Use Prisma's deploy command as a release step, with `DATABASE_URL` pointed at Neon:
 
 ```bash
-wasp db migrate-prod
+npx prisma migrate deploy --schema .wasp/out/db/schema.prisma
 ```
 
 ## Hosting shape

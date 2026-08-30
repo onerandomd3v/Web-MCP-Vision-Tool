@@ -8,7 +8,7 @@
 
 **Tech Stack:** Wasp 0.25, React, TypeScript, Vite, Prisma/Postgres, `use-webmcp-tool`, Vitest, Docker for development, Neon plus a Wasp-compatible server host for deployment.
 
-**Spec:** `C:\Users\HP\Downloads\webmcp-vision-tool-design.md`
+**Spec:** [`docs/verification/webmcp-vision.md`](../../verification/webmcp-vision.md) (repository-tracked verification contract)
 
 ## Global Constraints
 

@@ -7,7 +7,10 @@ export function UserPhotoPanel() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => () => {
-    if (photoUrl?.startsWith("blob:")) URL.revokeObjectURL(photoUrl);
+    if (photoUrl?.startsWith("blob:")) {
+      URL.revokeObjectURL(photoUrl);
+      if (getUserPhotoUrl() === photoUrl) setUserPhotoUrl(null);
+    }
   }, [photoUrl]);
 
   function onFileChange(file: File | undefined) {

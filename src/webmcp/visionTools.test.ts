@@ -6,6 +6,7 @@ import {
   selectVisionProducts,
   toProductImageResult,
 } from "./visionTools";
+import { matchToUserPhotoSchema } from "./schemas";
 
 describe("toProductImageResult", () => {
   it("returns a targeted image reference without extra product data", () => {
@@ -39,6 +40,7 @@ describe("assertBoundedProductIds", () => {
     expect(() => assertBoundedProductIds(["a", "b", "c", "d"])).toThrow();
     expect(() => assertBoundedProductIds(["a", ""])).toThrow();
     expect(() => assertBoundedProductIds(["a", 2])).toThrow();
+    expect(() => assertBoundedProductIds(["a", "a"])).toThrow("duplicates");
   });
 });
 
@@ -70,6 +72,8 @@ describe("vision result composition", () => {
       recommendationPrompt: expect.stringContaining("sleek and black"),
     });
     expect(() => buildPhotoMatchResult("", candidate)).toThrow();
+    expect(() => buildPhotoMatchResult(undefined, candidate)).toThrow();
     expect(() => buildBestFitContext(candidate, " ")).toThrow();
+    expect(matchToUserPhotoSchema.required).toBeUndefined();
   });
 });

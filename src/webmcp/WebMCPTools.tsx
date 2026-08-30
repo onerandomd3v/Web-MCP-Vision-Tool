@@ -157,10 +157,10 @@ export function WebMCPTools() {
         "Return product images alongside a user-provided photo URL so a multimodal agent can judge visual fit. The tool supplies context; it does not perform image reasoning itself.",
       inputSchema: matchToUserPhotoSchema,
       annotations: readOnly,
-      execute: async (args: { photoUrl: string; category?: string }) => {
+      execute: async (args: { photoUrl?: string; category?: string }) => {
         const products = await getProducts(args.category ? { category: args.category } : {});
         return buildPhotoMatchResult(
-          args.photoUrl || getUserPhotoUrl(),
+          args.photoUrl ?? getUserPhotoUrl(),
           selectVisionProducts(products, products.slice(0, 3).map((p) => p.slug), 1, 3),
         );
       },

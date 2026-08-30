@@ -98,7 +98,6 @@ export const matchToUserPhotoSchema = {
       description: "Optional catalog category to narrow visual candidates.",
     },
   },
-  required: ["photoUrl"],
   additionalProperties: false,
 } as const;
 
