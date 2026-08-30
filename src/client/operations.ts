@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 
-const API_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, "") ?? "";
+// Keep the deployed demo usable even when a preview is created before Vercel's
+// environment variables are injected into the client build. VITE_API_URL still
+// overrides this for hosted environments and local development.
+const API_URL =
+  (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, "") ??
+  "https://webmcp-vision-server-v5-production.up.railway.app";
 
 export type OperationName =
   | "getProducts" | "getProduct" | "compareProducts" | "getMyGear"
