@@ -88,7 +88,9 @@ TODO: record and publish a public YouTube video under three minutes. The shot-by
 ## Known Limitations
 
 - User photos currently use browser object URLs and are not persisted or uploaded to a storage provider.
-- Live WebMCP inspector verification has not yet been completed from a forwarded public origin.
+- The deployed public origin was checked in the WebMCP inspector: structured
+  catalog tools and all five vision tools were listed; account-only commerce
+  tools remained gated until login.
 - Production deployment and the initial Neon migration have been completed; future schema changes still require an explicit production migration.
 - The starter’s catalog remains espresso-oriented even though the product experience is branded WebMCP Vision.
 
