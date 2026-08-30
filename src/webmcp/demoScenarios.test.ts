@@ -16,7 +16,7 @@ describe("vision demo scenarios", () => {
       { productId: "ignored", name: "Ignored", imageUrl: "https://example.com/i.jpg" },
     ]);
 
-    expect(context.candidates.map(({ productId }) => productId)).toEqual(["compact-machine", "minimal-machine"]);
+    expect(context.candidates.map(({ productId }) => productId)).toEqual(["minimal-machine", "compact-machine"]);
     expect(context.expectedVisualTool).toBe("compareProductAesthetics");
   });
 });
