@@ -2,6 +2,14 @@
 
 WebMCP Vision Tool is an agent-ready shopping experience for visual product decisions. It combines fast, structured commerce actions with focused product imagery, so an AI agent can answer questions about appearance without relying on full-page screenshots or guesswork.
 
+## Live release
+
+- Client: [webmcp-vision.vercel.app](https://webmcp-vision.vercel.app/)
+- Wasp server: [webmcp-vision-server-v5-production.up.railway.app](https://webmcp-vision-server-v5-production.up.railway.app/)
+- Source: [onerandomd3v/Web-MCP-Vision-Tool](https://github.com/onerandomd3v/Web-MCP-Vision-Tool)
+
+The client and server are deployed from the tested release on `main`. The server uses Neon PostgreSQL for production data.
+
 ## The experience
 
 Shoppers can search the catalog, inspect product details, compare specifications, evaluate appearance, match products to a room photo, and add products to a cart. The application uses two complementary tool layers:
