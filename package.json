@@ -1,10 +1,6 @@
 {
   "name": "webmcp-vision",
   "type": "module",
-  "workspaces": [
-    ".wasp/out/*",
-    ".wasp/out/sdk/wasp"
-  ],
   "dependencies": {
     "@prisma/client": "5.19.1",
     "@vitejs/plugin-react": "^5.1.1",
@@ -32,7 +28,6 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@wasp.sh/spec": "file:.wasp/spec/",
     "prisma": "5.19.1",
     "typescript": "6.0.3",
     "vite": "^8.1.0",
