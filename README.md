@@ -81,5 +81,6 @@ Keep local Docker data and production database credentials separate.
 ## Demo and contribution workflow
 
 The product demo sequence is in [`docs/demo-script.md`](docs/demo-script.md), and the submission copy is in [`devpost-submission.md`](devpost-submission.md).
+The final release and submission checklist is in [`docs/submission-checklist.md`](docs/submission-checklist.md).
 
 Create a focused branch from `dev`, run the verification commands, and open a pull request back to `dev`. `main` is reserved for tested releases.
