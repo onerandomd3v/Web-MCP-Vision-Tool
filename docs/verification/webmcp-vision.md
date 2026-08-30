@@ -9,6 +9,15 @@ Run the app in the Codespace with `wasp start`, forward ports 3000 and 3001, and
 - `wasp compile` succeeds.
 - `npm test` succeeds.
 
+## Recorded Codespace baseline
+
+On 2026-08-30 in the `dev` Codespace, the client returned HTTP 200 on port 3000,
+the generated server returned HTTP 200 on port 3001, and
+`POST /operations/get-products` returned HTTP 200 in approximately 0.16 seconds.
+Codespaces exposed private HTTPS forwards for ports 3000 and 3001. This confirms
+the Wasp runtime and operation path; it is not a substitute for the public-origin
+Chrome WebMCP inspection below.
+
 ## WebMCP checks
 
 1. Enable the Chrome WebMCP flag and open the running client.
