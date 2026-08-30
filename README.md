@@ -64,6 +64,10 @@ wasp start
 
 The client runs on port `3000` and the server on port `3001`. In Codespaces, the development proxy keeps browser requests same-origin. Keep `.env` files, database URLs, API keys, and uploaded photos out of Git.
 
+## License
+
+WebMCP Vision Tool is released under the [MIT License](LICENSE).
+
 ## Verification
 
 From the repository root:
