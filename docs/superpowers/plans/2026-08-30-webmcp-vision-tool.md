@@ -34,7 +34,7 @@
 
 - [x] Confirm the Codespace is on `dev` and the working tree is clean.
 - [x] Run `wasp doctor`, `wasp db start`, `wasp db migrate-dev`, and `wasp compile`.
-- [ ] Run `npm run test` if present, otherwise `npx vitest run` only for test execution.
+- [x] Run `npm run test` if present, otherwise `npx vitest run` only for test execution (GitHub Actions CI passed `npm test`).
 - [x] Start the app with `wasp start`; verify the forwarded client and server ports are reachable.
 - [x] Commit no generated artifacts unless already tracked; record any Codespaces URL-routing limitation in the PR notes.
 
@@ -71,7 +71,7 @@
 - [x] Test duplicate IDs, unknown IDs, empty arrays, and the maximum candidate count.
 - [x] Implement stable ordering so the agent can compare products deterministically.
 - [x] Keep the existing specification comparison tool unchanged and make the visual tool descriptions clearly distinguish image judgment from specs.
-- [ ] Run focused tests, `wasp compile`, and a manual WebMCP inspection; commit `feat: add visual comparison tools`.
+- [x] Run focused tests and `wasp compile` (covered by the passing GitHub Actions CI run); manual WebMCP inspection remains in Task 7.
 
 ### Task 4: Build the user-photo upload and `matchToUserPhoto` flow
 
@@ -90,7 +90,7 @@
 - [x] Start with a temporary browser object URL for the local demo; isolate a future storage adapter so deployment storage can be added without changing the tool contract.
 - [x] Add clear consent and removal copy; do not persist or transmit a photo until the user explicitly selects it.
 - [x] Limit candidate count and reuse existing catalog filtering rather than duplicating product data.
-- [ ] Run `wasp compile`, Vitest, and a browser upload smoke test; commit `feat: add user photo matching flow`.
+- [x] Run `wasp compile` and Vitest (covered by the passing GitHub Actions CI run); browser upload smoke test remains in Task 7.
 
 ### Task 5: Add the higher-level `pickBestFit` tool and compose the demo flow
 
@@ -107,7 +107,7 @@
 - [x] Test empty preferences, unknown products, duplicate products, and bounded candidate lists.
 - [x] Describe the tool as supplying context to a multimodal agent, not as an image model or an autonomous checkout action.
 - [x] Document the intended chain: structured search → image retrieval/comparison → visual recommendation → optional add-to-cart.
-- [ ] Run all tests and `wasp compile`; commit `feat: compose visual recommendation flow`.
+- [x] Run all tests and `wasp compile` (covered by the passing GitHub Actions CI run).
 
 ### Task 6: Rebrand the experience and make the visual tier discoverable
 
@@ -124,7 +124,7 @@
 - [x] Remove remaining Crema/espresso-specific product-facing branding only after the tool flow works.
 - [x] Keep factual starter attribution and the unresolved licensing note accurate.
 - [x] Add an accessible visual-tools entry point and status/error states for unavailable images.
-- [ ] Verify desktop/wide layout first, then responsive behavior; run `wasp compile` and browser smoke tests.
+- [ ] Verify desktop/wide layout first, then responsive behavior; browser smoke tests remain in Task 7 (Wasp compile passes in CI).
 - [x] Commit `feat: rebrand WebMCP Vision experience`.
 
 ### Task 7: Verify WebMCP behavior and Codespaces routing
@@ -144,6 +144,8 @@
 - [ ] Test a spec-only prompt and confirm no image tool is called.
 - [ ] Test upload matching, side-by-side comparison, visual difference, and the safety rule that checkout is never called without explicit user instruction.
 - [ ] Capture latency/token observations against a full-page screenshot fallback and record them in the verification document.
+
+> Automated verification evidence: GitHub Actions run `33282372887` passed PostgreSQL setup, Wasp 0.25 installation, migrations, `wasp compile`, and `npm test` on Ubuntu with Node 24.14.1.
 
 ### Task 8: Prepare deployment, submission, and demo video assets
 
