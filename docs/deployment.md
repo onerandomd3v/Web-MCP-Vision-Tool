@@ -25,6 +25,16 @@ npx prisma migrate deploy --schema .wasp/out/db/schema.prisma
 - Use Neon for managed Postgres.
 - Configure CORS and `WASP_WEB_CLIENT_URL` to the exact client origin.
 
+## Railway server configuration
+
+The repository includes `railway.toml` for the Wasp server service. It tells
+Railway to install the pinned Wasp CLI, build the generated application, run
+production Prisma migrations, and start `.wasp/out/server/bundle/server.js`.
+After linking the `dev` branch, set `DATABASE_URL`, `JWT_SECRET`,
+`WASP_SERVER_URL`, and `WASP_WEB_CLIENT_URL` as Railway variables, then
+trigger a deployment. Keep the client deployment separate and point its API
+URL at the Railway service domain.
+
 ## First Fly deployment
 
 The GitHub Actions workflow in `.github/workflows/deploy-wasp-fly.yml` is for
