@@ -36,6 +36,8 @@ wasp build
 REACT_APP_API_URL=https://api.example.com npx vite build
 ```
 
+The equivalent repository script is `REACT_APP_API_URL=https://api.example.com npm run build:client`.
+
 The client output is `.wasp/out/web-app/build/`. Configure the static host's
 output directory to that path. The generated server is bundled at
 `.wasp/out/server/bundle/server.js` and is run by the generated server package;
