@@ -74,7 +74,7 @@ This project is being built for the WebMCP Challenge. The work will focus on:
 
 ## Repository workflow
 
-`dev` is the integration branch. Create a feature branch from `dev`, open a pull request back into `dev`, and use `main` only for production-ready releases.
+`dev` is the protected integration branch. Create a feature branch from `dev`, open a pull request back into `dev`, and use `main` only for production-ready releases. Both branches require a pull request review, linear history, resolved review threads, and reject force-pushes and deletions.
 
 ## Starter attribution
 
@@ -82,4 +82,4 @@ This repository began from the [webmcp-espresso-store](https://github.com/vincan
 
 ## Status
 
-The first vision tool layer and browser photo panel are implemented on the feature branch. The next gate is running `npm test` and `wasp compile` in the Codespace, followed by live WebMCP verification in Chrome.
+The first vision tool layer, browser photo panel, deterministic demo scenarios, and automated Wasp/Postgres CI are implemented on the feature branch. The remaining gate is live WebMCP verification in Chrome, followed by deployment and the recorded demo.
