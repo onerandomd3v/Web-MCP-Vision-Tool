@@ -145,7 +145,7 @@
 - [ ] Test upload matching, side-by-side comparison, visual difference, and the safety rule that checkout is never called without explicit user instruction.
 - [ ] Capture latency/token observations against a full-page screenshot fallback and record them in the verification document.
 
-> Automated verification evidence: GitHub Actions run `33282372887` passed PostgreSQL setup, Wasp 0.25 installation, migrations, `wasp compile`, and `npm test` on Ubuntu with Node 24.14.1.
+> Automated verification evidence: GitHub Actions run `33282753946` passed PostgreSQL setup, Wasp 0.25 installation, migrations, `wasp compile`, and `npm test` (20 tests) on Ubuntu with Node 24.14.1.
 
 ### Task 8: Prepare deployment, submission, and demo video assets
 
