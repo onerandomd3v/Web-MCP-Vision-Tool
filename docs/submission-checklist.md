@@ -15,6 +15,11 @@ The WebMCP Challenge submission deadline is **September 3, 2026 at 1:00 PM Pacif
 - [x] Open the public URL in ChatGPT's in-app browser or Chrome with WebMCP testing enabled.
 - [x] Confirm the catalog loads and the public routes behave as expected.
 - [x] Confirm the WebMCP inspector lists the structured tools and five vision tools.
+
+The inspector check was completed against the deployed public origin on August
+30, 2026. It showed the structured catalog tools and the five vision tools;
+authentication, cart, coupon, and checkout tools remained gated until login.
+
 - [ ] Verify a factual search uses structured tools without requesting images.
 - [ ] Verify visual comparison, difference highlighting, photo matching, and best-fit recommendation work from the public origin.
 - [ ] Confirm checkout is never called without an explicit request.
