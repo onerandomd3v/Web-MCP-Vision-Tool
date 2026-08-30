@@ -8,13 +8,18 @@ The WebMCP Challenge submission deadline is **September 3, 2026 at 1:00 PM Pacif
 
 ## Before submitting
 
-- [ ] Merge the final tested changes into `dev`, then promote the same commit to `main` through the protected pull request flow.
-- [ ] Confirm the repository is public and the final commit is visible on the submitted branch.
-- [ ] Deploy the client and server to permanent public URLs.
-- [ ] Run the production database migration explicitly against the production database.
-- [ ] Open the public URL in ChatGPT's in-app browser or Chrome with WebMCP testing enabled.
-- [ ] Confirm the catalog loads and authenticated routes behave as expected.
-- [ ] Confirm the WebMCP inspector lists the structured tools and five vision tools.
+- [x] Merge the final tested changes into `dev`, then promote the same commit to `main` through the protected pull request flow.
+- [x] Confirm the repository is public and the final commit is visible on the submitted branch.
+- [x] Deploy the client and server to permanent public URLs.
+- [x] Run the production database migration explicitly against the production database.
+- [x] Open the public URL in ChatGPT's in-app browser or Chrome with WebMCP testing enabled.
+- [x] Confirm the catalog loads and the public routes behave as expected.
+- [x] Confirm the WebMCP inspector lists the structured tools and five vision tools.
+
+The inspector check was completed against the deployed public origin on August
+30, 2026. It showed the structured catalog tools and the five vision tools;
+authentication, cart, coupon, and checkout tools remained gated until login.
+
 - [ ] Verify a factual search uses structured tools without requesting images.
 - [ ] Verify visual comparison, difference highlighting, photo matching, and best-fit recommendation work from the public origin.
 - [ ] Confirm checkout is never called without an explicit request.
