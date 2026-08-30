@@ -1,6 +1,6 @@
 [build]
 builder = "RAILPACK"
-buildCommand = "npm install --global @wasp.sh/wasp-cli@0.25.0 && wasp build"
+buildCommand = "npm install --global @wasp.sh/wasp-cli@0.25.0 && wasp install && wasp build"
 
 [deploy]
 startCommand = "npx prisma migrate deploy --schema .wasp/out/db/schema.prisma && node .wasp/out/server/bundle/server.js"
