@@ -64,6 +64,14 @@ https://webmcp-vision-server-v5-production.up.railway.app/
 
 https://github.com/onerandomd3v/Web-MCP-Vision-Tool
 
+## Devpost Project Draft
+
+https://devpost.com/software/webmcp-vision
+
+The project page is published as a draft for The WebMCP Challenge. It is not
+submitted yet; the public license and demonstration video must be completed
+before final submission.
+
 ## Demo Video
 
 TODO: record and publish a public YouTube video under three minutes. The shot-by-shot outline is in [`docs/demo-script.md`](docs/demo-script.md).
