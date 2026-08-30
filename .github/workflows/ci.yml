@@ -39,17 +39,20 @@ jobs:
           node-version: 24.14.1
           cache: npm
 
-      - name: Install Wasp
-        run: npm install --global @wasp.sh/wasp-cli@0.25.0
-
       - name: Install project dependencies
-        run: wasp install
+        run: npm install
 
-      - name: Apply database migrations
-        run: wasp db migrate-dev
+      - name: Generate Prisma client
+        run: npx prisma generate
 
-      - name: Compile Wasp project
-        run: wasp compile
+      - name: Apply database schema
+        run: npx prisma db push --accept-data-loss
+
+      - name: Build server
+        run: npm run build:server
+
+      - name: Build client
+        run: npm run build:client
 
       - name: Run tests
         run: npm test

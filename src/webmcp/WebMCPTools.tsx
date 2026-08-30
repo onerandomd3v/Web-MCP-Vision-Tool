@@ -5,7 +5,7 @@
 // everything through Wasp operations, useHighlightStore.getState(), and the
 // module-level navigateRef.
 import { useWebMCP } from "use-webmcp-tool";
-import { useAuth } from "wasp/client/auth";
+import { useAuth } from "../client/auth";
 import {
   addToCart,
   applyCoupon,
@@ -21,7 +21,7 @@ import {
   removeFromCart,
   setCompareList,
   updateCartQuantity,
-} from "wasp/client/operations";
+} from "../client/operations";
 import { celebrateOrder } from "../cart/celebrate";
 import { useHighlightStore } from "../compare/highlightStore";
 import { navigateRef } from "../navigation";

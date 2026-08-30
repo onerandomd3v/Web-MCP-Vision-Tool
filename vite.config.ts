@@ -1,9 +1,9 @@
 import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import { wasp } from "wasp/client/vite";
 
 export default defineConfig({
-  plugins: [wasp(), tailwindcss()],
+  plugins: [react(), tailwindcss()],
   server: {
     open: false,
     // Codespaces exposes the browser client publicly, while the generated

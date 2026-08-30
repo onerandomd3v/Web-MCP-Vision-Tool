@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { SignupForm } from "wasp/client/auth";
+import { SignupForm } from "./SignupForm";
 
 export function SignupPage() {
   return (

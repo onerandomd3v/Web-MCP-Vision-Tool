@@ -47,19 +47,19 @@ Vision results are bounded and deterministic. Product IDs are validated, duplica
 - `use-webmcp-tool` for browser tool registration
 - Vitest for contract and behavior tests
 
-This is one application repository. Wasp generates the browser client and Node server from the same specification, allowing the client and server to be deployed independently without maintaining separate codebases.
+This is one application repository with a React/Vite browser client and an Express/TypeScript API. The two deploy independently without maintaining separate codebases.
 
 ## Local development
 
-Run the project in the Linux Codespace or another Linux environment with Node 24.14.1 or newer, Wasp 0.25, and Docker.
+Run the project with Node 24.14.1 or newer and a PostgreSQL database.
 
 ```bash
-npm install --global @wasp.sh/wasp-cli@0.25.0
 npm install
-wasp doctor
-wasp db start
-wasp db migrate-dev
-wasp start
+npx prisma generate
+npx prisma migrate deploy
+npm run build:server
+npm run build:client
+npm run start:server
 ```
 
 The client runs on port `3000` and the server on port `3001`. In Codespaces, the development proxy keeps browser requests same-origin. Keep `.env` files, database URLs, API keys, and uploaded photos out of Git.
@@ -69,7 +69,8 @@ The client runs on port `3000` and the server on port `3001`. In Codespaces, the
 From the repository root:
 
 ```bash
-wasp compile
+npm run build:server
+npm run build:client
 npm test
 ```
 
