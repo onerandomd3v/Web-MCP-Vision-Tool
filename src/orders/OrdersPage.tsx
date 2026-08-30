@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { getMyGear, useQuery } from "wasp/client/operations";
+import { getMyGear, useQuery } from "../client/operations";
 import { formatEur, timeAgo } from "../shared/format";
 
 export function OrdersPage() {

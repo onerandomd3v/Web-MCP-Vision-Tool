@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, Outlet, useNavigate } from "react-router";
-import { logout, useAuth } from "wasp/client/auth";
-import { getCart, getCompareList, useQuery } from "wasp/client/operations";
+import { logout, useAuth } from "./client/auth";
+import { getCart, getCompareList, useQuery } from "./client/operations";
 import "./Main.css";
 import { CartDrawer } from "./cart/CartDrawer";
 import { useCartUiStore } from "./cart/cartUiStore";

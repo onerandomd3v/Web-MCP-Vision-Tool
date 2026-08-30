@@ -64,6 +64,14 @@ https://webmcp-vision-server-v5-production.up.railway.app/
 
 https://github.com/onerandomd3v/Web-MCP-Vision-Tool
 
+## Devpost Project Draft
+
+https://devpost.com/software/webmcp-vision
+
+The project page is published as a draft for The WebMCP Challenge. It is not
+submitted yet; the public demonstration video must be completed before final
+submission. The repository now includes a visible MIT license.
+
 ## Demo Video
 
 TODO: record and publish a public YouTube video under three minutes. The shot-by-shot outline is in [`docs/demo-script.md`](docs/demo-script.md).
@@ -82,7 +90,7 @@ TODO: record and publish a public YouTube video under three minutes. The shot-by
 - The repository is public and contains the WebMCP implementation and run instructions.
 - The live client and server are deployed and verified; the public client loads the catalog and registers the structured and vision tools.
 - Browser screenshots and the YouTube demo video remain to be captured and published.
-- The challenge requires a detectable open-source license. The inherited starter has no license, so adding one requires upstream permission or replacement of the unlicensed starter code before submission.
+- The repository includes a detectable MIT open-source license at its root.
 - The official form requires selecting submitter type, country, app status, live URL, public repo URL, tested agent/client, AI tools used, learning level, and AI career value.
 
 ## Known Limitations

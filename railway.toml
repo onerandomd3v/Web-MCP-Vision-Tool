@@ -1,8 +1,8 @@
 [build]
 builder = "RAILPACK"
-buildCommand = "npm install --global @wasp.sh/wasp-cli@0.25.0 && wasp install && wasp build"
+buildCommand = "npm install && npx prisma generate && npm run build:server && npm run build:client"
 
 [deploy]
-startCommand = "cd .wasp/out/server && npm run bundle && npm run db-migrate-prod && WASP_DB_SEED_NAME=devSeed node --enable-source-maps -r dotenv/config bundle/dbSeed.js && npm run start"
+startCommand = "npx prisma migrate deploy && npm run start:server"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 5

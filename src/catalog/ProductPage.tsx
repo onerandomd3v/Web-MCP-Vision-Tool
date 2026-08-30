@@ -1,11 +1,11 @@
 import { Fragment } from "react";
 import { useParams } from "react-router";
-import { useAuth } from "wasp/client/auth";
+import { useAuth } from "../client/auth";
 import {
   checkCompatibility,
   getProduct,
   useQuery,
-} from "wasp/client/operations";
+} from "../client/operations";
 import { AddToCartButton } from "../cart/AddToCartButton";
 import { CompareToggle } from "../compare/CompareToggle";
 import { CATEGORY_LABELS, formatEur } from "../shared/format";

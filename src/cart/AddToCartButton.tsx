@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useAuth } from "wasp/client/auth";
-import { addToCart } from "wasp/client/operations";
+import { useAuth } from "../client/auth";
+import { addToCart } from "../client/operations";
 
 export function AddToCartButton({
   slug,
