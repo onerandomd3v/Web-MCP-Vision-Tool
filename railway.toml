@@ -1,0 +1,8 @@
+[build]
+builder = "RAILPACK"
+buildCommand = "npm install --global @wasp.sh/wasp-cli@0.25.0 && wasp install && wasp build"
+
+[deploy]
+startCommand = "cd .wasp/out/server && npm run bundle && npm run db-migrate-prod && WASP_DB_SEED_NAME=devSeed node --enable-source-maps -r dotenv/config bundle/dbSeed.js && npm run start"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

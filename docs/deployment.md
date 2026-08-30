@@ -21,29 +21,20 @@ npx prisma migrate deploy --schema .wasp/out/db/schema.prisma
 ## Hosting shape
 
 - Host the generated Wasp client as a static Vite build on Vercel.
-- Host the generated Wasp Node server on Fly or Railway.
+- Host the generated Wasp Node server on Railway.
 - Use Neon for managed Postgres.
 - Configure CORS and `WASP_WEB_CLIENT_URL` to the exact client origin.
 
-## First Fly deployment
+## Railway server configuration
 
-The GitHub Actions workflow in `.github/workflows/deploy-wasp-fly.yml` is for
-redeploying an already-created Fly application. The first launch must be run
-interactively from a Linux environment after the production database and
-secrets have been approved:
-
-```bash
-wasp deploy fly launch webmcp-vision <region>
-```
-
-This creates the client, server, and database services and writes the validated
-`fly-client.toml` and `fly-server.toml` manifests. Run the launch command only
-once. Before using the workflow, create a Fly organization token and add it to
-the repository as the `FLY_API_TOKEN` secret. Dispatching the workflow then
-redeploys the existing application with `wasp deploy fly deploy`.
-
-Fly may require a payment method for the three-service topology. Confirm the
-account's pricing and spending controls before creating production resources.
+The repository includes `railway.toml` for the Wasp server service. It tells
+Railway to install the pinned Wasp CLI, build the generated application, run
+production Prisma migrations, seed the idempotent catalog/demo data, and start
+`.wasp/out/server/bundle/server.js`.
+After linking the `dev` branch, set `DATABASE_URL`, `JWT_SECRET`,
+`WASP_SERVER_URL`, and `WASP_WEB_CLIENT_URL` as Railway variables, then
+trigger a deployment. Keep the client deployment separate and point its API
+URL at the Railway service domain.
 
 ## Build artifacts
 

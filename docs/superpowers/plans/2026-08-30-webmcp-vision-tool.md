@@ -150,7 +150,7 @@
 ### Task 8: Prepare deployment, submission, and demo video assets
 
 **Files:**
-- Modify: `fly-client.toml` and `fly-server.toml` only where validated deployment settings require it.
+- Configure Railway directly for the generated Wasp server; no Fly manifests are part of this deployment.
 - Create: `docs/deployment.md` covering client hosting, Wasp server hosting, Neon, environment variables, and migrations.
 - Create: `docs/demo-script.md` with the spoken and on-screen sequence for the product video.
 - Modify: `README.md` with live demo, repository, and video links when available.
