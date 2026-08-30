@@ -69,7 +69,8 @@ The client runs on port `3000` and the server on port `3001`. In Codespaces, the
 From the repository root:
 
 ```bash
-wasp compile
+npm run build:server
+npm run build:client
 npm test
 ```
 
