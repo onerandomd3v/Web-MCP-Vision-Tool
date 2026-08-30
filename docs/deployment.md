@@ -25,4 +25,24 @@ npx prisma migrate deploy --schema .wasp/out/db/schema.prisma
 - Use Neon for managed Postgres.
 - Configure CORS and `WASP_WEB_CLIENT_URL` to the exact client origin.
 
+## Build artifacts
+
+Wasp generates the deployable source under `.wasp/out/`. Build the application
+and then create the static client artifact with the client API URL supplied at
+build time:
+
+```bash
+wasp build
+REACT_APP_API_URL=https://api.example.com npx vite build
+```
+
+The client output is `.wasp/out/web-app/build/`. Configure the static host's
+output directory to that path. The generated server is bundled at
+`.wasp/out/server/bundle/server.js` and is run by the generated server package;
+deploy it from the generated Dockerfile or the selected Wasp-compatible host.
+
+`wasp build` clears `.wasp/out/`, so do not store hand-edited deployment files
+inside that directory. Keep project-level deployment manifests and repeat the
+build before each release.
+
 Before release, verify catalog reads, authentication, cart actions, image URLs, upload behavior, and all WebMCP registrations against the deployed origin. Do not expose the development database or temporary browser object URLs in production.
