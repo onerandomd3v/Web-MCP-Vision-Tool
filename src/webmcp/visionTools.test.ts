@@ -74,6 +74,6 @@ describe("vision result composition", () => {
     expect(() => buildPhotoMatchResult("", candidate)).toThrow();
     expect(() => buildPhotoMatchResult(undefined, candidate)).toThrow();
     expect(() => buildBestFitContext(candidate, " ")).toThrow();
-    expect(matchToUserPhotoSchema.required).toBeUndefined();
+    expect("required" in matchToUserPhotoSchema).toBe(false);
   });
 });
