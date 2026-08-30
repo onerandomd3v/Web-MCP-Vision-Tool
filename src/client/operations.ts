@@ -34,13 +34,13 @@ export const applyCoupon = operation("applyCoupon");
 export const placeOrder = operation("placeOrder");
 
 function endpoint(operation: OperationName, args: Record<string, unknown> | undefined) {
-  if (operation === getProducts) {
+  if (operation === "getProducts") {
     const params = new URLSearchParams();
     if (typeof args?.query === "string") params.set("query", args.query);
     if (typeof args?.category === "string") params.set("category", args.category);
     return `/api/products${params.size ? `?${params}` : ""}`;
   }
-  if (operation === getProduct && typeof args?.slug === "string") {
+  if (operation === "getProduct" && typeof args?.slug === "string") {
     return `/api/products/${encodeURIComponent(args.slug)}`;
   }
   return `/api/operations/${operation}`;
