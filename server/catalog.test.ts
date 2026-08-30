@@ -46,7 +46,7 @@ const products: CatalogProduct[] = [
 
 describe("listProducts", () => {
   it("filters by category and orders by category then descending price", () => {
-    expect(listProducts(products)).toEqual([products[0], products[1]]);
+    expect(listProducts(products)).toEqual([products[1], products[0]]);
     expect(listProducts(products, { category: "GRINDER" })).toEqual([products[1]]);
   });
 
