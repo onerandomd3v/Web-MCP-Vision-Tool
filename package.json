@@ -1,5 +1,5 @@
 {
-  "name": "webmcp-espresso",
+  "name": "webmcp-vision",
   "type": "module",
   "workspaces": [
     ".wasp/out/*",
