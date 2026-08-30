@@ -52,7 +52,7 @@ function endpoint(operation: OperationName, args: Record<string, unknown> | unde
 }
 
 async function request<T>(operation: OperationName, args?: Record<string, unknown>): Promise<T> {
-  const method = operation === getProducts || operation === getProduct ? "GET" : "POST";
+  const method = operation === "getProducts" || operation === "getProduct" ? "GET" : "POST";
   const response = await fetch(`${API_URL}${endpoint(operation, args)}`, {
     method,
     credentials: "include",
