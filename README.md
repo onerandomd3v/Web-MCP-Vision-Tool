@@ -1,89 +1,84 @@
-# WebMCP Vision
+ # WebMCP Vision Tool
 
-WebMCP Vision is an agent-native shopping experience that combines reliable, structured WebMCP actions with on-demand visual reasoning.
+ WebMCP Vision Tool is a vision-assisted shopping experience built for the WebMCP Challenge. It lets an AI agent use reliable commerce actions for routine tasks and request focused product imagery only when a shopper needs a visual answer.
 
-Instead of asking an agent to navigate a page by screenshots and guesswork, the app exposes intentional tools for search, comparison, cart actions, and product data. When a request genuinely needs a visual opinion, the agent can retrieve only the relevant product assets and evaluate them with a vision-capable model.
+ ## What this project does
 
-## The problem
+ The app helps shoppers discover products, compare specifications, inspect appearance, match products to a room photo, and continue with ordinary cart actions. The experience is deliberately split into two tiers:
 
-Structured product data can answer questions about price, materials, compatibility, and stock. It cannot answer questions such as:
+ - Structured WebMCP tools handle search, filtering, product details, compatibility, cart, coupons, and checkout.
+ - Vision tools return small, targeted image references for visual questions such as finish, color, shape, and style matching.
 
-- Which option looks best in a minimalist kitchen?
-- Which finish matches the room in this photo?
-- What visual differences matter between these two products?
+ The server supplies product data and image references. A multimodal agent performs the visual interpretation; this application does not claim to be an image model.
 
-Full-page screenshots are a poor default for those moments: they are slower, more token-intensive, and force an agent to locate the relevant object before it can reason about it.
+ ## Vision tools
 
-## The approach
+ | Tool | Purpose |
+ | --- | --- |
+ | `getProductImage` | Return one product image and its metadata for visual evaluation. |
+ | `compareProductAesthetics` | Return a bounded, ordered set of product images for side-by-side comparison. |
+ | `highlightVisualDifference` | Return the assets needed to explain visual differences between products. |
+ | `matchToUserPhoto` | Return bounded catalog candidates that can be compared with a shopper photo. |
+ | `pickBestFit` | Provide candidate images and preference context for a visual recommendation. |
 
-WebMCP Vision uses two tool tiers:
+ Every vision result is bounded and deterministic. Product IDs are validated, duplicate candidates are removed, and missing images are reported instead of silently substituted. No image bytes or secrets are placed in WebMCP schemas.
 
-1. **Structured action tools** handle the fast path: discovery, filtering, specifications, cart actions, and checkout.
-2. **Vision access tools** return targeted product image references only when a user asks for a visual judgment.
+ ## Shopper flow
 
-That separation keeps routine interactions fast and dependable while giving an agent the context it needs for subjective visual decisions.
+ 1. Use structured search to narrow the catalog.
+ 2. Ask for product images only when the question requires visual judgment.
+ 3. Optionally select a local JPG, PNG, or WebP room photo. The browser keeps a temporary object URL until the shopper removes it or leaves the page.
+ 4. Compare the returned references and explain the trade-offs.
+ 5. Add an item to the cart only when the shopper asks; checkout is never invoked implicitly.
 
-## Planned experience
+ ## Technology
 
-The first version will help a shopper move from an intent such as “find something sleek and black that works in my space” to a grounded recommendation:
+ - Wasp 0.25 full-stack application
+ - React, TypeScript, and Vite client
+ - Node server with Prisma and PostgreSQL
+ - `use-webmcp-tool` for browser tool registration
+ - Vitest for focused contract tests
 
-1. The agent narrows candidates with structured product information.
-2. When visual judgment is needed, it requests only the relevant images.
-3. For room or style matching, the shopper can upload a photo of their own space.
-4. The agent compares the photo and candidate products, explains the visual trade-offs, and can continue with supported shopping actions.
+ The source is one repository. Wasp generates the browser client and Node server from the same application specification, so the two deployment artifacts can be hosted separately without maintaining separate codebases.
 
-## WebMCP vision tools
+ ## Development
 
-| Tool | Purpose |
-| --- | --- |
-| `getProductImage` | Retrieve one product image for direct visual evaluation. |
-| `compareProductAesthetics` | Retrieve a focused set of product images for side-by-side comparison. |
-| `matchToUserPhoto` | Return category candidates that can be compared against a shopper-uploaded photo. |
-| `highlightVisualDifference` | Provide the assets needed to explain visual differences such as finish, color, or form. |
-| `pickBestFit` | Support a visual recommendation using a shopper’s stated aesthetic preference. |
+ Use the Linux Codespace or another Linux environment. Node 24.14.1 or newer, Wasp 0.25, and Docker are required.
 
-The vision tools return focused image references and context. Visual reasoning is performed by the agent's multimodal model; the server does not pretend to be an image model. Existing structured tools remain the default for search, specifications, compatibility, cart, coupons, and checkout.
+ ```bash
+ npm install --global @wasp.sh/wasp-cli@0.25.0
+ wasp doctor
+ wasp db start
+ wasp db migrate-dev
+ wasp start
+ ```
 
-## Local development
+ The client runs on port `3000` and the server on port `3001`. Codespaces forwards both ports through [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json). Never commit `.env` files, database URLs, API keys, or uploaded photos.
 
-Use the Linux Codespace or another Linux environment for Wasp:
+ ## Verification
 
-```bash
-npm install --global @wasp.sh/wasp-cli@0.25.0
-wasp doctor
-wasp db start
-wasp db migrate-dev
-wasp start
-```
+ Run the project checks from the repository root:
 
-The client normally runs on port 3000 and the server on port 3001. The checked-in
-`.devcontainer/devcontainer.json` declares both forwards for Codespaces. If the
-forwarded client still calls `localhost:3001`, set `REACT_APP_API_URL` in a local
-`.env.client` file to the forwarded HTTPS address for port 3001, then restart Wasp.
-Never commit environment files or secrets.
+ ```bash
+ wasp compile
+ npm test
+ ```
 
-## Verification and deployment
+ The browser and WebMCP verification checklist is in [`docs/verification/webmcp-vision.md`](docs/verification/webmcp-vision.md). It covers structured-first tool selection, image retrieval, comparison, photo matching, and the explicit-checkout safety rule.
 
-The complete WebMCP test checklist is in [`docs/verification/webmcp-vision.md`](docs/verification/webmcp-vision.md). Production deployment guidance for a Vercel client, Wasp server host, and Neon Postgres is in [`docs/deployment.md`](docs/deployment.md). The planned recording sequence is in [`docs/demo-script.md`](docs/demo-script.md).
+ ## Deployment
 
-## Development direction
+ The generated client is intended for Vercel, the generated Node server for a Wasp-compatible host such as Fly, and production PostgreSQL for Neon. Deployment variables and migration steps are documented in [`docs/deployment.md`](docs/deployment.md). Local development uses its own Docker database and must remain separate from production.
 
-This project is being built for the WebMCP Challenge. The work will focus on:
+ ## Demo and submission
 
-- meaningful WebMCP integration, rather than browser automation disguised as tools;
-- a real user-photo upload flow for visual matching;
-- clear, targeted image access instead of broad page screenshots;
-- an observable, testable demonstration of the structured and vision-assisted paths; and
-- a deployment, public repository, and documentation that let reviewers understand and test the experience.
+ The recording sequence is documented in [`docs/demo-script.md`](docs/demo-script.md), and the current submission copy is in [`devpost-submission.md`](devpost-submission.md). The final submission still requires a judge-accessible deployment, a public video, and an appropriate open-source license.
 
-## Repository workflow
+ ## Contribution workflow
 
-`dev` is the protected integration branch. Create a feature branch from `dev`, open a pull request back into `dev`, and use `main` only for production-ready releases. Both branches require a pull request review, linear history, resolved review threads, and reject force-pushes and deletions.
+ Create a focused branch from `dev`, make the change, run the checks above, and open a pull request back to `dev`. `main` is reserved for a tested release. Protected branch rules require review, linear history, resolved conversations, and no force-pushes or branch deletion.
 
-## Starter attribution
+ ## Project foundation and license note
 
-This repository began from the [webmcp-espresso-store](https://github.com/vincanger/webmcp-espresso-store) starter. WebMCP Vision is being developed as a distinct project and will document its own implementation work clearly.
+ The project foundation includes the WebMCP Espresso Store starter, whose catalog and commerce behavior are being extended here with the WebMCP Vision Tool experience. The upstream repository currently publishes no license. Before claiming an open-source release, written permission must be obtained or the unlicensed portions must be replaced with code that can be licensed by this project. See [`docs/licensing-blocker.md`](docs/licensing-blocker.md).
 
-## Status
-
-The first vision tool layer, browser photo panel, deterministic demo scenarios, and automated Wasp/Postgres CI are implemented on the feature branch. The remaining gate is live WebMCP verification in Chrome, followed by deployment and the recorded demo.
