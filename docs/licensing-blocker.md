@@ -1,17 +1,13 @@
-# Licensing release gate
+# Licensing release record
 
 The WebMCP Challenge requires the public repository to contain a detectable
-open-source license. The upstream `vincanger/webmcp-espresso-store` repository
-currently reports no license, so this derivative repository must not add a
-license covering inherited code without permission from the upstream author.
+open-source license. Permission to license the project was confirmed by the
+project owner on August 30, 2026, and the repository now includes an MIT
+license at the root. The README links to the same license.
 
-Before submitting, choose one of these documented paths:
+Before submitting, verify that the GitHub repository page still reports MIT in
+its license metadata and that the submitted commit includes `LICENSE`.
 
-1. Obtain written permission from the upstream author and add the agreed license.
-2. Replace the unlicensed starter portions with code that is independently owned
-   or permissively licensed, then add a license that accurately covers the result.
-
-Do not claim the repository is open source on Devpost until the license is
-visible on the repository page. The WebMCP additions are timestamped in the
-challenge window, including commits `c20a8b7`, `42a7857`, and `8c09ecc`, which
-supports the required explanation of meaningful extension of an existing app.
+The WebMCP additions are timestamped in the challenge window, including
+commits `c20a8b7`, `42a7857`, and `8c09ecc`, which supports the required
+explanation of meaningful extension of an existing app.
