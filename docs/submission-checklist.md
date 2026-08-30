@@ -10,6 +10,7 @@ The WebMCP Challenge submission deadline is **September 3, 2026 at 1:00 PM Pacif
 
 - [x] Merge the final tested changes into `dev`, then promote the same commit to `main` through the protected pull request flow.
 - [x] Confirm the repository is public and the final commit is visible on the submitted branch.
+- [x] Confirm the repository contains a visible MIT open-source license.
 - [x] Deploy the client and server to permanent public URLs.
 - [x] Run the production database migration explicitly against the production database.
 - [x] Open the public URL in ChatGPT's in-app browser or Chrome with WebMCP testing enabled.
