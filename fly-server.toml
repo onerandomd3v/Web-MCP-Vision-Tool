@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for crema-and-co-server on 2026-08-21T16:16:46+02:00
+# Fly app configuration for the WebMCP Vision server.
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'crema-and-co-server'
+app = 'webmcp-vision-server'
 primary_region = 'ams'
 
 [build]

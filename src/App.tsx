@@ -28,7 +28,7 @@ export default function App() {
       <nav className="sticky top-0 z-40 border-b border-stone-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center gap-6 px-6 py-3">
           <Link to="/" className="text-xl font-bold tracking-tight">
-            ☕ Crema&nbsp;&amp;&nbsp;Co.
+            ◈ WebMCP&nbsp;Vision
           </Link>
           <Link to="/" className="text-stone-600 hover:text-stone-900">
             Catalog

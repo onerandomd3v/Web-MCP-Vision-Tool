@@ -1,5 +1,5 @@
 {
-  "name": "webmcp-espresso",
+  "name": "webmcp-vision",
   "type": "module",
   "workspaces": [
     ".wasp/out/*",
@@ -27,6 +27,7 @@
     "vitest": "^4.1.9"
   },
   "scripts": {
+    "build:client": "wasp build && vite build",
     "demo:reset": "wasp db seed demoReset",
     "test": "vitest run"
   }

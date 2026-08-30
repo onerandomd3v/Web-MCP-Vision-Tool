@@ -1,81 +1,84 @@
-# Crema & Co. — a WebMCP espresso store (Wasp demo)
+ # WebMCP Vision Tool
 
-[![webmcp-espresso-shop](./public/webmcp-espresso-thumb.png)](https://x.com/hot_town/status/2092481550096924926)
+ WebMCP Vision Tool is a vision-assisted shopping experience built for the WebMCP Challenge. It lets an AI agent use reliable commerce actions for routine tasks and request focused product imagery only when a shopper needs a visual answer.
 
-A demo web store built with **Wasp 0.25** whose queries and actions are exposed to AI agents via **WebMCP**. An agent connected to the browser tab can compare espresso machines, check compatibility against your past purchases, visually highlight the spec rows that drove its recommendation, and put the right items in the cart — with the UI updating live through Wasp's automatic query invalidation.
+ ## What this project does
 
-## Prerequisites
+ The app helps shoppers discover products, compare specifications, inspect appearance, match products to a room photo, and continue with ordinary cart actions. The experience is deliberately split into two tiers:
 
-- Node ≥ 24, Docker, `npm i -g @wasp.sh/wasp-cli@latest` (Wasp 0.25)
-- **Chrome 149+** (151+ recommended) with WebMCP enabled:
-  - `chrome://flags/#enable-webmcp-testing` → **Enabled** → Relaunch
-    (or launch Chrome with `--enable-features=WebMCP`)
-  - `chrome://inspect/#remote-debugging` → allow remote debugging
-  - Sanity check in DevTools: `'modelContext' in document` → `true`
-- Optional: the [Model Context Tool Inspector](https://chromewebstore.google.com/detail/webmcp-model-context-tool/gbpdfapgefenggkahomfgkhfehlcenpd) extension.
+ - Structured WebMCP tools handle search, filtering, product details, compatibility, cart, coupons, and checkout.
+ - Vision tools return small, targeted image references for visual questions such as finish, color, shape, and style matching.
 
-## Setup
+ The server supplies product data and image references. A multimodal agent performs the visual interpretation; this application does not claim to be an image model.
 
-```bash
-npm install && wasp install
-wasp start db
-wasp db migrate-dev
-wasp db seed devSeed
-wasp start
-```
+ ## Vision tools
 
-The app runs on **http://localhost:3000** (API on :3001). Run `wasp start db` in a separate terminal — Wasp starts a Postgres container and wires up `DATABASE_URL` for you.
+ | Tool | Purpose |
+ | --- | --- |
+ | `getProductImage` | Return one product image and its metadata for visual evaluation. |
+ | `compareProductAesthetics` | Return a bounded, ordered set of product images for side-by-side comparison. |
+ | `highlightVisualDifference` | Return the assets needed to explain visual differences between products. |
+ | `matchToUserPhoto` | Return bounded catalog candidates that can be compared with a shopper photo. |
+ | `pickBestFit` | Provide candidate images and preference context for a visual recommendation. |
 
-**Demo user:** `vince` / `espresso123` — owns a Lelit Mara X V2, a Lagom Casa grinder and a drawer of 58 mm accessories across 3 past orders; has coupon `BARISTA10` (10 %); compare list pre-loaded with the Linea Mini R and the Bianca V3.
+ Every vision result is bounded and deterministic. Product IDs are validated, duplicate candidates are removed, and missing images are reported instead of silently substituted. No image bytes or secrets are placed in WebMCP schemas.
 
-## Connecting an agent
+ ## Shopper flow
 
-`.mcp.json` (repo root, for Claude Code):
+ 1. Use structured search to narrow the catalog.
+ 2. Ask for product images only when the question requires visual judgment.
+ 3. Optionally select a local JPG, PNG, or WebP room photo. The browser keeps a temporary object URL until the shopper removes it or leaves the page.
+ 4. Compare the returned references and explain the trade-offs.
+ 5. Add an item to the cart only when the shopper asks; checkout is never invoked implicitly.
 
-```json
-{
-  "mcpServers": {
-    "chrome-devtools": {
-      "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@latest", "--categoryExperimentalWebmcp", "--autoConnect", "--no-usage-statistics"]
-    }
-  }
-}
-```
+ ## Technology
 
-Claude Desktop: the same `mcpServers` block in `claude_desktop_config.json` (Settings → Developer → Edit Config); use an absolute path to `npx` if Node isn't found. Before recording, set `execute_webmcp_tool` to "always allow" (Claude Code) / "Allow always" (Desktop) so takes aren't interrupted by permission prompts.
+ - Wasp 0.25 full-stack application
+ - React, TypeScript, and Vite client
+ - Node server with Prisma and PostgreSQL
+ - `use-webmcp-tool` for browser tool registration
+ - Vitest for focused contract tests
 
-Make sure the `localhost:3000` tab is the focused tab in the flagged Chrome — the badge bottom-right shows the live tool count: **16 tools logged in, 3 logged out** (the milestone plan says 17; its own tool table enumerates 16).
+ The source is one repository. Wasp generates the browser client and Node server from the same application specification, so the two deployment artifacts can be hosted separately without maintaining separate codebases.
 
-## Demo script
+ ## Development
 
-Reset state between takes:
+ Use the Linux Codespace or another Linux environment. Node 24.14.1 or newer, Wasp 0.25, and Docker are required.
 
-```bash
-npm run demo:reset
-```
+ ```bash
+ npm install --global @wasp.sh/wasp-cli@0.25.0
+ wasp doctor
+ wasp db start
+ wasp db migrate-dev
+ wasp start
+ ```
 
-Setup: logged in as `vince`, on `/compare`, cart empty, highlights cleared (reload the tab).
+ The client runs on port `3000` and the server on port `3001`. Codespaces forwards both ports through [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json). Never commit `.env` files, database URLs, API keys, or uploaded photos.
 
-**Prompt 1** — *"Upgrading from my Mara X. I make flat whites for two every morning and the counter spot is 32 cm wide. Which of these two?"*
+ ## Verification
 
-Expected trace: `get_compare_list` → `compare_products` → `get_my_gear` → `check_compatibility` ×2 → `highlight_differences` (≈ widthCm, portafilterFit, priceEur, flowControl, steamBoilerL + note). Expected answer: **Bianca V3** — 29 cm fits the 32 cm spot (Linea Mini is 35.7), every accessory carries over (the LM needs its own €179 portafilter), flow paddle, ~€3,000 less.
+ Run the project checks from the repository root:
 
-**Prompt 2** — *"Bianca in white, plus a water filter that fits it, and use whatever discount I've got."*
+ ```bash
+ wasp compile
+ npm test
+ ```
 
-Expected trace: `search_products({category:"WATER_FILTER"})` → `check_compatibility(lelit-pla930m vs lelit-bianca-v3)` → `get_my_coupons` → `add_to_cart` ×2 → `apply_coupon` — and **no `checkout`**. Cart drawer opens by itself: Bianca V3 (white) €2,299.00 + PLA930M €29.90, coupon BARISTA10 −€232.89, total **€2,096.01**.
+ The browser and WebMCP verification checklist is in [`docs/verification/webmcp-vision.md`](docs/verification/webmcp-vision.md). It covers structured-first tool selection, image retrieval, comparison, photo matching, and the explicit-checkout safety rule.
 
-**Prompt 3 (optional)** — *"Place the order."* → `checkout` → confetti, "Order #N placed" banner, cart empties, order appears on `/orders`.
+ ## Deployment
 
-## Development
+ The generated client is intended for Vercel, the generated Node server for a Wasp-compatible host such as Fly, and production PostgreSQL for Neon. Deployment variables and migration steps are documented in [`docs/deployment.md`](docs/deployment.md). Local development uses its own Docker database and must remain separate from production.
 
-```bash
-npm test            # compatibility engine + seed invariants (Vitest)
-npm run demo:reset  # restore vince's canonical demo state
-```
+ ## Demo and submission
 
-The compatibility rules live in `src/shared/compatibility.ts` (pure, fully unit-tested); WebMCP tool registrations in `src/webmcp/WebMCPTools.tsx`.
+ The recording sequence is documented in [`docs/demo-script.md`](docs/demo-script.md), and the current submission copy is in [`devpost-submission.md`](devpost-submission.md). The final submission still requires a judge-accessible deployment, a public video, and an appropriate open-source license.
 
-## Spec sources
+ ## Contribution workflow
 
-Product specs were researched from manufacturer/retailer pages — every product's page links its `sourceUrl`. **Prices are approximate EU street prices incl. VAT, August 2026.** Key sources: lamarzocco.com · lelit.com · profitec-espresso.com · sageappliances.com · option-o.com · df64coffee.com · mahlkoniguk.co.uk · baratza.com · normcorewares.com · coffeedesk.com · caffewerks.com · cremashop.eu · eu.acaia.co · captncoffee.com · home.lamarzoccousa.com · espressocoffeeshop.com · kaffeemacher.de · wholelattelove.com. Product images are pulled from these pages for demo purposes only.
+ Create a focused branch from `dev`, make the change, run the checks above, and open a pull request back to `dev`. `main` is reserved for a tested release. Protected branch rules require review, linear history, resolved conversations, and no force-pushes or branch deletion.
+
+ ## Project foundation and license note
+
+ The project foundation includes the WebMCP Espresso Store starter, whose catalog and commerce behavior are being extended here with the WebMCP Vision Tool experience. The upstream repository currently publishes no license. Before claiming an open-source release, written permission must be obtained or the unlicensed portions must be replaced with code that can be licensed by this project. See [`docs/licensing-blocker.md`](docs/licensing-blocker.md).
+
