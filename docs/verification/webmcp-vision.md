@@ -1,6 +1,6 @@
 # WebMCP Vision Verification
 
-Run the app in the Codespace with `wasp start`, forward ports 3000 and 3001, and open the forwarded client URL. Keep the server URL out of source control; if the client defaults to `localhost:3001`, set `REACT_APP_API_URL` in the local client environment to the forwarded HTTPS URL for port 3001 and restart Wasp.
+Run the app in the Codespace with `wasp start`, forward port 3000, and open the forwarded client URL. The development Vite config proxies `/operations`, `/auth`, `/api`, `/file`, and `/upload` to the private Wasp server on port 3001. Set `REACT_APP_API_URL` in the local client environment to the forwarded client origin; never commit environment files or server URLs.
 
 ## Environment gate
 
@@ -17,6 +17,12 @@ the generated server returned HTTP 200 on port 3001, and
 Codespaces exposed private HTTPS forwards for ports 3000 and 3001. This confirms
 the Wasp runtime and operation path; it is not a substitute for the public-origin
 Chrome WebMCP inspection below.
+
+After the same-origin proxy was added, a direct Codespace smoke test on the
+development branch returned HTTP 200 for the client and HTTP 200 for
+`POST /operations/get-products` through the client origin. This removes the
+browser `localhost:3001` failure while keeping the server port private. It is
+still a development preview, not a production deployment.
 
 ## WebMCP checks
 
