@@ -55,7 +55,10 @@ For browser testing, forward ports 3000 and 3001, set the forwarded API URL as d
 
 ## Public Demo Link
 
-TODO: add the deployed URL after the client and server are released and verified.
+https://webmcp-vision.vercel.app/
+
+The React client is deployed on Vercel. Its Wasp server runs on Railway and uses Neon PostgreSQL:
+https://webmcp-vision-server-v5-production.up.railway.app/
 
 ## Public Repository Link
 
@@ -77,7 +80,8 @@ TODO: record and publish a public YouTube video under three minutes. The shot-by
 
 - Code, tests, Wasp compile, and CI are currently passing in Codespaces.
 - The repository is public and contains the WebMCP implementation and run instructions.
-- A live production URL, Chrome/in-app-browser evidence, screenshots, and YouTube video are still required.
+- The live client and server are deployed and verified; the public client loads the catalog and registers the structured and vision tools.
+- Browser screenshots and the YouTube demo video remain to be captured and published.
 - The challenge requires a detectable open-source license. The inherited starter has no license, so adding one requires upstream permission or replacement of the unlicensed starter code before submission.
 - The official form requires selecting submitter type, country, app status, live URL, public repo URL, tested agent/client, AI tools used, learning level, and AI career value.
 
@@ -85,7 +89,7 @@ TODO: record and publish a public YouTube video under three minutes. The shot-by
 
 - User photos currently use browser object URLs and are not persisted or uploaded to a storage provider.
 - Live WebMCP inspector verification has not yet been completed from a forwarded public origin.
-- Production deployment and Neon migration have not yet been performed.
+- Production deployment and the initial Neon migration have been completed; future schema changes still require an explicit production migration.
 - The starter’s catalog remains espresso-oriented even though the product experience is branded WebMCP Vision.
 
 ## TODO Official Form Fields
@@ -93,9 +97,9 @@ TODO: record and publish a public YouTube video under three minutes. The shot-by
 - Submitter Type: choose the truthful Devpost value.
 - Country of residence: choose the truthful value(s).
 - App Status: likely `Existing`; explain the WebMCP extension made during the submission period.
-- Live URL: fill after production verification.
+- Live URL: `https://webmcp-vision.vercel.app/`.
 - Public code repository: `https://github.com/onerandomd3v/Web-MCP-Vision-Tool`.
-- Tested agent/client: fill after Chrome or ChatGPT in-app-browser verification.
+- Tested agent/client: ChatGPT in-app browser; the public catalog route and WebMCP registration were verified.
 - AI tools leveraged: describe the multimodal agent and Codex accurately.
 - Learning level: choose the truthful value.
 - AI career value: choose the truthful value.

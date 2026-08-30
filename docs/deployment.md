@@ -25,6 +25,16 @@ npx prisma migrate deploy --schema .wasp/out/db/schema.prisma
 - Use Neon for managed Postgres.
 - Configure CORS and `WASP_WEB_CLIENT_URL` to the exact client origin.
 
+## Current release
+
+- Client: https://webmcp-vision.vercel.app/
+- Server: https://webmcp-vision-server-v5-production.up.railway.app/
+- Source branch: `main`
+
+The current Railway release runs the reviewed Wasp build, applies pending
+Neon migrations, runs the explicit idempotent `devSeed`, and starts the Node
+server on port `3001`.
+
 ## Railway server configuration
 
 The repository includes `railway.toml` for the Wasp server service. It tells
