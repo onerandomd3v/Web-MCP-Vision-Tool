@@ -34,6 +34,15 @@ URL; repeat this check after deploying to a permanent host.
 
 ## WebMCP checks
 
+### Public-origin evidence (2026-08-31)
+
+The deployed client at https://webmcp-vision-tool.vercel.app/ returned the
+catalog page with 31 products. Its WebMCP inspector listed 8 public tools:
+the two structured catalog tools, `compare_products`, and the five vision
+tools (`getProductImage`, `compareProductAesthetics`,
+`highlightVisualDifference`, `matchToUserPhoto`, and `pickBestFit`).
+Account, cart, coupon, and checkout tools remained correctly gated until login.
+
 1. Enable the Chrome WebMCP flag and open the running client.
 2. Confirm the WebMCP badge lists the structured tools and the five vision tools.
 3. Ask for a factual product search. Confirm `search_products` is used and no image tool is requested.
