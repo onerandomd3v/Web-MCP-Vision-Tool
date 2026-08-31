@@ -85,22 +85,6 @@ export const highlightVisualDifferenceSchema = {
   additionalProperties: false,
 } as const;
 
-export const matchToUserPhotoSchema = {
-  type: "object",
-  properties: {
-    photoUrl: {
-      type: "string",
-      description: "The user photo URL supplied by the photo upload panel.",
-    },
-    category: {
-      type: "string",
-      enum: [...CATEGORY_ENUM],
-      description: "Optional catalog category to narrow visual candidates.",
-    },
-  },
-  additionalProperties: false,
-} as const;
-
 export const pickBestFitSchema = {
   type: "object",
   properties: {

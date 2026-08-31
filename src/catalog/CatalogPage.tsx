@@ -2,7 +2,6 @@ import { useState } from "react";
 import { getProducts, useQuery } from "../client/operations";
 import { CATEGORY_LABELS } from "../shared/format";
 import { ProductCard } from "./ProductCard";
-import { UserPhotoPanel } from "../vision/UserPhotoPanel";
 
 const CATEGORIES = Object.keys(CATEGORY_LABELS);
 
@@ -18,8 +17,6 @@ export function CatalogPage() {
       <p className="mb-6 text-stone-500">
         Explore products with structured facts, then ask for a visual opinion when it matters.
       </p>
-
-      <UserPhotoPanel />
 
       <div className="mb-6 flex flex-wrap gap-2">
         <Chip active={!category} onClick={() => setCategory(null)}>
