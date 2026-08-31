@@ -42,6 +42,9 @@ the two structured catalog tools, `compare_products`, and the five vision
 tools (`getProductImage`, `compareProductAesthetics`,
 `highlightVisualDifference`, `matchToUserPhoto`, and `pickBestFit`).
 Account, cart, coupon, and checkout tools remained correctly gated until login.
+Direct navigation to `/compare` and `/product/lelit-bianca-v3` also loaded the
+React routes successfully after the Vercel history fallback was added. The
+product image proxy returned HTTP 200 with `image/jpeg` for the Bianca image.
 
 1. Enable the Chrome WebMCP flag and open the running client.
 2. Confirm the WebMCP badge lists the structured tools and the five vision tools.
