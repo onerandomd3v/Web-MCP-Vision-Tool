@@ -46,6 +46,14 @@ Direct navigation to `/compare` and `/product/lelit-bianca-v3` also loaded the
 React routes successfully after the Vercel history fallback was added. The
 product image proxy returned HTTP 200 with `image/jpeg` for the Bianca image.
 
+Live recheck on 2026-08-31 confirmed the same state after the architecture
+documentation release: the root client returned HTTP 200, the `/compare` route
+rendered its empty-state UI, and the inspector showed `7 of 20 registered`.
+The public list contained `search_products`, `get_product_details`,
+`getProductImage`, `compareProductAesthetics`, `highlightVisualDifference`,
+`pickBestFit`, and `compare_products`. No user-photo upload control,
+`matchToUserPhoto` tool, or photo-comparison endpoint was exposed.
+
 1. Enable the Chrome WebMCP flag and open the running client.
 2. Confirm the WebMCP badge lists the structured tools and the four vision tools.
 3. Ask for a factual product search. Confirm `search_products` is used and no image tool is requested.
