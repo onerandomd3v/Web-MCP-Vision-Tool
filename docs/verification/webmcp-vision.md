@@ -9,7 +9,8 @@ secrets.
 ## Environment gate
 
 - Node 24.14.1 or newer is installed and PostgreSQL is reachable.
-- `npx prisma migrate deploy` reports the database is in sync.
+- `npm run db:migrate` reports the database is in sync using
+  `apps/backend/schema.prisma`.
 - `npm run build:client` and `npm run build:server` succeed.
 - `npm test` succeeds.
 
