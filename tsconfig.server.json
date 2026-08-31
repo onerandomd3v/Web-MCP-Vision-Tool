@@ -10,6 +10,6 @@
     "outDir": "dist",
     "types": ["node"]
   },
-  "include": ["server/**/*.ts"],
-  "exclude": ["server/**/*.test.ts"]
+  "include": ["apps/backend/server/**/*.ts"],
+  "exclude": ["apps/backend/server/**/*.test.ts"]
 }
