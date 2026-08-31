@@ -127,7 +127,7 @@ matching tool or upload UI is needed.
 - [x] Remove remaining Crema/espresso-specific product-facing branding only after the tool flow works.
 - [x] Keep project-owned branding and the MIT licensing notice accurate.
 - [x] Add an accessible visual-tools entry point and status/error states for unavailable images.
-- [ ] Verify desktop/wide layout first, then responsive behavior; browser smoke tests remain in Task 7.
+- [x] Verify the deployed desktop layout and route rendering; responsive and agent-driven checks remain in Task 7.
 - [x] Commit `feat: rebrand WebMCP Vision experience`.
 
 ### Task 7: Verify WebMCP behavior and Codespaces routing
@@ -141,8 +141,8 @@ matching tool or upload UI is needed.
 - Consumes: all registered structured and vision tools.
 - Produces: evidence that the agent uses structured tools first and requests image references only for visual prompts.
 
-- [ ] Expose/forward ports 3000 and 3001 in Codespaces and configure the client API URL for the forwarded server URL.
-- [ ] Enable the Chrome WebMCP testing flag and confirm tools appear in the Model Context Tool Inspector.
+- [x] Expose/forward ports 3000 and 3001 in Codespaces and configure the client API URL for the forwarded server URL.
+- [x] Enable the Chrome WebMCP testing flag and confirm the seven public tools appear in the WebMCP inspector.
 - [ ] Test the prompt “Which two machines look better for a minimalist white kitchen?” and confirm image tools are called only after product discovery.
 - [ ] Test a spec-only prompt and confirm no image tool is called.
 - [ ] Test side-by-side comparison, visual difference, agent-side photo comparison, and the safety rule that checkout is never called without explicit user instruction.
@@ -162,9 +162,9 @@ matching tool or upload UI is needed.
 - Consumes: verified build and tool behavior.
 - Produces: a reproducible deployment and a concise Devpost-ready narrative showing WebMCP leverage, creativity, impact, and implementation proof.
 
-- [ ] Configure Neon only through deployment secrets; keep local development DB separate.
-- [ ] Deploy the Vite client and Express server using the selected hosting path, then run production migrations explicitly.
-- [ ] Verify authenticated routes, catalog, image URLs, and WebMCP tools against the deployed origin.
+- [x] Configure Neon only through deployment secrets; keep local development DB separate.
+- [x] Deploy the Vite client and Express server using the selected hosting path, then run production migrations explicitly.
+- [x] Verify public catalog routes, product image URLs, and WebMCP tools against the deployed origin; authenticated-flow verification remains part of the manual demo.
 - [ ] Record a two-to-three-minute demo: structured search, visual comparison against a photo shared in the agent chat, recommendation rationale, and optional cart action.
 - [ ] Prepare Devpost description, architecture explanation, repository link, deployed link, and video; confirm the submission deadline and challenge requirements before submitting.
 - [ ] Merge the feature branch into `dev`, then promote the tested release to `main` through the protected PR flow.
