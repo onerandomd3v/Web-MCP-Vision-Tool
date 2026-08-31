@@ -24,7 +24,7 @@
 - Never commit API keys, database credentials, uploaded photos, or `.env` files.
 - Run the client and server build scripts plus `npm test` for validation.
 - Work from `dev` on a focused feature branch and merge through a pull request.
-- Do not add an open-source license to inherited starter code without upstream permission.
+- The repository is released under the MIT License in `LICENSE`; do not add secrets or third-party credentials.
 
 ---
 
@@ -125,7 +125,7 @@ matching tool or upload UI is needed.
 - Produces: a coherent product experience that explains when image tools are used without encouraging screenshots for routine actions.
 
 - [x] Remove remaining Crema/espresso-specific product-facing branding only after the tool flow works.
-- [x] Keep factual starter attribution and the unresolved licensing note accurate.
+- [x] Keep project-owned branding and the MIT licensing notice accurate.
 - [x] Add an accessible visual-tools entry point and status/error states for unavailable images.
 - [ ] Verify desktop/wide layout first, then responsive behavior; browser smoke tests remain in Task 7.
 - [x] Commit `feat: rebrand WebMCP Vision experience`.
