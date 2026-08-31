@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 
-// Keep the deployed demo usable even when a preview is created before Vercel's
-// environment variables are injected into the client build. VITE_API_URL still
-// overrides this for hosted environments and local development.
-const API_URL =
-  (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, "") ??
-  "https://webmcp-vision-server-v5-production.up.railway.app";
+// Hosted builds use the Railway API. During Vite development, an unset API URL
+// must stay same-origin so Codespaces can use the local /api proxy instead of
+// trying to call localhost:3001 from the browser.
+const configuredApiUrl = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, "");
+const API_URL = configuredApiUrl ?? (
+  import.meta.env.DEV ? "" : "https://webmcp-vision-server-v5-production.up.railway.app"
+);
 
 export type OperationName =
   | "getProducts" | "getProduct" | "compareProducts" | "getMyGear"

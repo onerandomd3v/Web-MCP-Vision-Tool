@@ -5,7 +5,7 @@ WebMCP Vision Tool is an agent-ready shopping experience for visual product deci
 ## Live release
 
 - Client: [webmcp-vision.vercel.app](https://webmcp-vision.vercel.app/)
-- Wasp server: [webmcp-vision-server-v5-production.up.railway.app](https://webmcp-vision-server-v5-production.up.railway.app/)
+- API: [webmcp-vision-server-v5-production.up.railway.app](https://webmcp-vision-server-v5-production.up.railway.app/)
 - Source: [onerandomd3v/Web-MCP-Vision-Tool](https://github.com/onerandomd3v/Web-MCP-Vision-Tool)
 
 The client and server are deployed from the tested release on `main`. The server uses Neon PostgreSQL for production data.
@@ -41,9 +41,8 @@ Vision results are bounded and deterministic. Product IDs are validated, duplica
 
 ## Technology
 
-- Wasp 0.25 full-stack application
 - React, TypeScript, and Vite client
-- Node server with Prisma and PostgreSQL
+- Express/Node API with Prisma and PostgreSQL
 - `use-webmcp-tool` for browser tool registration
 - Vitest for contract and behavior tests
 

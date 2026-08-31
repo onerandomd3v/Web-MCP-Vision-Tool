@@ -2,7 +2,7 @@
 //
 // IMPORTANT: `execute` functions must not close over React state
 // (use-webmcp-tool doesn't re-register when `execute` changes). They read
-// everything through Wasp operations, useHighlightStore.getState(), and the
+// everything through API operations, useHighlightStore.getState(), and the
 // module-level navigateRef.
 import { useWebMCP } from "use-webmcp-tool";
 import { useAuth } from "../client/auth";

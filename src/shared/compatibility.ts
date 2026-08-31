@@ -1,4 +1,4 @@
-// Pure compatibility rules engine (R0–R6). No Wasp/Prisma imports — unit-testable.
+// Pure compatibility rules engine (R0–R6). No framework/database imports — unit-testable.
 
 export type CompatStatus =
   | "COMPATIBLE"

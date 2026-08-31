@@ -22,7 +22,7 @@ The multimodal agent performs the visual reasoning over the targeted URLs return
 
 ## How We Used Codex
 
-Codex helped inspect the Wasp starter, preserve the existing commerce tools, design bounded schemas, implement the React upload flow, write focused Vitest coverage, configure Wasp/Postgres CI, debug Codespaces routing and generated dependencies, and prepare the verification and demo documentation. Changes were developed on feature branches and merged into protected `dev` through pull requests.
+Codex helped preserve the existing commerce tools, design bounded schemas, implement the React upload flow, write focused Vitest coverage, configure the Express/Prisma API, debug Codespaces routing, and prepare the verification and demo documentation. Changes were developed on feature branches and merged into protected `dev` through pull requests.
 
 ## Key Features
 
@@ -35,20 +35,19 @@ Codex helped inspect the Wasp starter, preserve the existing commerce tools, des
 
 ## Architecture
 
-One Wasp 0.25 source repository generates a React/Vite client and Node server. Existing catalog and commerce operations remain in Wasp/Prisma/Postgres. `src/webmcp/` owns tool schemas and deterministic result shaping; `src/vision/` owns the temporary browser photo lifecycle. The intended release topology is a Vercel client, a Wasp-compatible Node host, and Neon Postgres.
+One source repository contains a React/Vite client and Express/Node API. `src/webmcp/` owns tool schemas and deterministic result shaping; `src/vision/` owns the temporary browser photo lifecycle. The release topology is a Vercel client, a Railway Node API, and Neon Postgres.
 
 ## Testing Instructions
 
-The authoritative local flow is in [`docs/verification/webmcp-vision.md`](docs/verification/webmcp-vision.md). In a Linux or Codespaces terminal with Node 24.14.1, Wasp 0.25, and Docker available:
+The authoritative local flow is in [`docs/verification/webmcp-vision.md`](docs/verification/webmcp-vision.md). In a Linux or Codespaces terminal with Node 24.14.1 and PostgreSQL available:
 
 ```bash
-npm install --global @wasp.sh/wasp-cli@0.25.0
-wasp doctor
-wasp db start
-wasp db migrate-dev
+npm install
+npx prisma generate
+npx prisma migrate deploy
 npm test
-wasp compile
-wasp start
+npm run build:server
+npm run build:client
 ```
 
 For browser testing, forward ports 3000 and 3001, set the forwarded API URL as described in the README, enable Chrome WebMCP testing, and test structured search before visual prompts. No production credentials are included.
@@ -57,7 +56,7 @@ For browser testing, forward ports 3000 and 3001, set the forwarded API URL as d
 
 https://webmcp-vision.vercel.app/
 
-The React client is deployed on Vercel. Its Wasp server runs on Railway and uses Neon PostgreSQL:
+The React client is deployed on Vercel. Its Express server runs on Railway and uses Neon PostgreSQL:
 https://webmcp-vision-server-v5-production.up.railway.app/
 
 ## Public Repository Link
@@ -86,7 +85,7 @@ TODO: record and publish a public YouTube video under three minutes. The shot-by
 
 ## Submission Readiness Notes
 
-- Code, tests, Wasp compile, and CI are currently passing in Codespaces.
+- Code, tests, client/server builds, and CI are currently passing in Codespaces.
 - The repository is public and contains the WebMCP implementation and run instructions.
 - The live client and server are deployed and verified; the public client loads the catalog and registers the structured and vision tools.
 - Browser screenshots and the YouTube demo video remain to be captured and published.

@@ -26,8 +26,7 @@ jobs:
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/webmcp_vision_test
       JWT_SECRET: ci-only-jwt-secret
-      WASP_SERVER_URL: http://localhost:3001
-      WASP_WEB_CLIENT_URL: http://localhost:3000
+      WEB_CLIENT_URL: http://localhost:3000
 
     steps:
       - name: Check out repository
