@@ -66,3 +66,12 @@ The public list contained `search_products`, `get_product_details`,
 ## Screenshot fallback comparison
 
 Record the number of tool calls, approximate response time, and whether the model received only product assets for the targeted-image flow. Compare it with a full-page screenshot prompt. The expected result is less page-search work and a smaller visual payload for the targeted flow.
+
+### Byte-level payload observation (2026-08-31)
+
+A read-only production check measured the serialized response sizes for the
+same catalog data: one targeted image result (`productId`, `name`, and
+`imageUrl`) was 149 JSON bytes, the full product record was 3,944 bytes, and
+the full catalog response was 44,503 bytes. These are network-payload
+observations, not model-token measurements; the latter still require a manual
+agent recording with a screenshot fallback for a fair comparison.
