@@ -1,5 +1,4 @@
-// Standalone Vitest config so unit tests run without the Wasp vite plugin
-// (vite.config.ts imports "wasp/client/vite", which only resolves after wasp install).
+// Standalone Vitest configuration for the React/Vite client and Express API.
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({

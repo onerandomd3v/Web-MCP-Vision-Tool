@@ -1,4 +1,4 @@
-// Full seed catalog (Appendix C.4). Pure data, no Wasp/Prisma imports — unit-testable.
+// Full seed catalog (Appendix C.4). Pure data, no framework/database imports — unit-testable.
 // Specs from manufacturer/retailer pages (sourceUrl on each product).
 // Prices ≈ EU street incl. VAT, Aug 2026.
 

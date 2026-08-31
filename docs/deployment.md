@@ -23,13 +23,13 @@ npx prisma migrate deploy
 - Host the Vite client as a static build on Vercel.
 - Host the Express Node server on Railway.
 - Use Neon for managed Postgres.
-- Configure CORS and `WASP_WEB_CLIENT_URL` to the exact client origin.
+- Configure CORS and `WEB_CLIENT_URL` to the exact client origin.
 
 ## Current release
 
 - Client: https://webmcp-vision.vercel.app/
 - Server: https://webmcp-vision-server-v5-production.up.railway.app/
-- Source branch: `main`
+- Source branch: `dev` (promote releases to `main` through a pull request)
 
 The Railway release applies pending Neon migrations and starts the API on port
 `3001`.
@@ -38,8 +38,8 @@ The Railway release applies pending Neon migrations and starts the API on port
 
 The repository includes `railway.toml` for the API service. It builds the
 TypeScript server, runs production Prisma migrations, and starts `dist/server/index.js`.
-After linking the `main` branch, set `DATABASE_URL`, `JWT_SECRET`,
-`WASP_SERVER_URL`, and `WASP_WEB_CLIENT_URL` as Railway variables, then
+After linking the `dev` branch, set `DATABASE_URL`, `JWT_SECRET`,
+`WEB_CLIENT_URL`, and `PORT` as Railway variables, then
 trigger a deployment. Keep the client deployment separate and point its API
 URL at the Railway service domain.
 
