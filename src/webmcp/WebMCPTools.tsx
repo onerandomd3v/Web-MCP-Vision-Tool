@@ -51,6 +51,7 @@ import {
   selectVisionProducts,
   toProductImageResult,
 } from "./visionTools";
+import { withoutImageUrl, withoutImageUrls } from "./structuredToolResults";
 
 // use-webmcp-tool aborts the browser's async registerTool() on unmount
 // (StrictMode double-mounts, `enabled` flips), and Chrome rejects that promise
@@ -114,8 +115,10 @@ export function WebMCPTools() {
         "Search the store catalog by free text and/or category. Returns product slugs, names, prices and key compatibility fields. Use the returned slugs with other tools.",
       inputSchema: searchProductsSchema,
       annotations: readOnly,
-      execute: (args: { query?: string; category?: string }) =>
-        getProducts(args ?? {}),
+      execute: async (args: { query?: string; category?: string }) =>
+        withoutImageUrls(
+          (await getProducts(args ?? {})) as Array<Record<string, unknown>>,
+        ),
     }),
 
     useWebMCP({
@@ -124,7 +127,10 @@ export function WebMCPTools() {
         "Full specification sheet for one product, including fields not shown on the product page, and the source the specs came from.",
       inputSchema: getProductDetailsSchema,
       annotations: readOnly,
-      execute: (args: { slug: string }) => getProduct({ slug: args.slug }),
+      execute: async (args: { slug: string }) =>
+        withoutImageUrl(
+          (await getProduct({ slug: args.slug })) as Record<string, unknown>,
+        ),
     }),
 
     useWebMCP({
