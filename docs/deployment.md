@@ -27,7 +27,7 @@ npx prisma migrate deploy
 
 ## Current release
 
-- Client: https://webmcp-vision.vercel.app/
+- Client: https://webmcp-vision-tool.vercel.app/
 - Server: https://webmcp-vision-server-v5-production.up.railway.app/
 - Source branch: `dev` (promote releases to `main` through a pull request)
 

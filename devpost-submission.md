@@ -54,7 +54,7 @@ For browser testing, forward ports 3000 and 3001, set the forwarded API URL as d
 
 ## Public Demo Link
 
-https://webmcp-vision.vercel.app/
+https://webmcp-vision-tool.vercel.app/
 
 The React client is deployed on Vercel. Its Express server runs on Railway and uses Neon PostgreSQL:
 https://webmcp-vision-server-v5-production.up.railway.app/
@@ -106,7 +106,7 @@ TODO: record and publish a public YouTube video under three minutes. The shot-by
 - Submitter Type: choose the truthful Devpost value.
 - Country of residence: choose the truthful value(s).
 - App Status: likely `Existing`; explain the WebMCP extension made during the submission period.
-- Live URL: `https://webmcp-vision.vercel.app/`.
+- Live URL: `https://webmcp-vision-tool.vercel.app/`.
 - Public code repository: `https://github.com/onerandomd3v/Web-MCP-Vision-Tool`.
 - Tested agent/client: ChatGPT in-app browser; the public catalog route and WebMCP registration were verified.
 - AI tools leveraged: describe the multimodal agent and Codex accurately.
