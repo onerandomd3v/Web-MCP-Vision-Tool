@@ -46,10 +46,10 @@
 ### Task 2: Add the baseline `getProductImage` WebMCP tool
 
 **Files:**
-- Modify: `src/webmcp/schemas.ts` to add the exact input schema for `productId`.
-- Modify: `src/webmcp/WebMCPTools.tsx` to register `getProductImage` beside the existing product tools.
-- Modify: `src/server/queries.ts` only if the existing product query cannot return `id`, `name`, and `imageUrl`.
-- Test: add focused tests under `src/webmcp/` for schema validation and missing-product behavior.
+- Modify: `apps/web/src/webmcp/schemas.ts` to add the exact input schema for `productId`.
+- Modify: `apps/web/src/webmcp/WebMCPTools.tsx` to register `getProductImage` beside the existing product tools.
+- Modify: `apps/backend/server/` only if the existing product API cannot return `id`, `name`, and `imageUrl`.
+- Test: add focused tests under `apps/web/src/webmcp/` for schema validation and missing-product behavior.
 
 **Interfaces:**
 - Consumes: existing product lookup/query and the product `imageUrl` field.
@@ -64,10 +64,10 @@
 ### Task 3: Add multi-product visual comparison tools
 
 **Files:**
-- Modify: `src/webmcp/schemas.ts` with schemas for `productIds` arrays and bounded array length.
-- Modify: `src/webmcp/WebMCPTools.tsx` to register `compareProductAesthetics` and `highlightVisualDifference`.
-- Create: `src/webmcp/visionTools.ts` for shared input normalization and result shaping.
-- Test: `src/webmcp/visionTools.test.ts`.
+- Modify: `apps/web/src/webmcp/schemas.ts` with schemas for `productIds` arrays and bounded array length.
+- Modify: `apps/web/src/webmcp/WebMCPTools.tsx` to register `compareProductAesthetics` and `highlightVisualDifference`.
+- Create: `apps/web/src/webmcp/visionTools.ts` for shared input normalization and result shaping.
+- Test: `apps/web/src/webmcp/visionTools.test.ts`.
 
 **Interfaces:**
 - Consumes: product IDs and existing catalog data.
@@ -98,10 +98,10 @@ matching tool or upload UI is needed.
 ### Task 5: Add the higher-level `pickBestFit` tool and compose the demo flow
 
 **Files:**
-- Modify: `src/webmcp/schemas.ts` with bounded `productIds` and `userPreference`.
-- Modify: `src/webmcp/WebMCPTools.tsx` to register `pickBestFit`.
-- Create: `src/webmcp/demoScenarios.ts` containing deterministic candidate fixtures and prompt examples used by tests/documentation.
-- Test: `src/webmcp/demoScenarios.test.ts`.
+- Modify: `apps/web/src/webmcp/schemas.ts` with bounded `productIds` and `userPreference`.
+- Modify: `apps/web/src/webmcp/WebMCPTools.tsx` to register `pickBestFit`.
+- Create: `apps/web/src/webmcp/demoScenarios.ts` containing deterministic candidate fixtures and prompt examples used by tests/documentation.
+- Test: `apps/web/src/webmcp/demoScenarios.test.ts`.
 
 **Interfaces:**
 - Consumes: candidate product IDs plus a natural-language visual preference.
@@ -115,10 +115,10 @@ matching tool or upload UI is needed.
 ### Task 6: Rebrand the experience and make the visual tier discoverable
 
 **Files:**
-- Modify: `index.html` and the React shell to use the WebMCP Vision app name/title.
-- Modify: `src/App.tsx`, `src/catalog/CatalogPage.tsx`, `src/catalog/ProductCard.tsx`, and `src/Main.css` for product-facing copy and visual entry points.
+- Modify: `apps/web/index.html` and the React shell to use the WebMCP Vision app name/title.
+- Modify: `apps/web/src/App.tsx`, `apps/web/src/catalog/CatalogPage.tsx`, `apps/web/src/catalog/ProductCard.tsx`, and `apps/web/src/Main.css` for product-facing copy and visual entry points.
 - Modify: `README.md` with final architecture, local setup, tool catalog, and demo script.
-- Modify: `public/favicon.ico` or add a new project-owned favicon asset only if the branding asset is available.
+- Modify: `apps/web/public/favicon.ico` or add a new project-owned favicon asset only if the branding asset is available.
 
 **Interfaces:**
 - Consumes: completed data-only vision tools.
@@ -133,7 +133,7 @@ matching tool or upload UI is needed.
 ### Task 7: Verify WebMCP behavior and Codespaces routing
 
 **Files:**
-- Modify: `.env.client.example` and `.env.server.example` if examples are missing; never commit real values.
+- Modify: `apps/web/.env.example` and `apps/backend/.env.example` if examples are missing; never commit real values.
 - Modify: `README.md` with Codespaces port-forwarding and Chrome WebMCP instructions.
 - Test: browser/manual verification checklist kept in `docs/verification/webmcp-vision.md`.
 

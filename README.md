@@ -54,18 +54,18 @@ project:
 
 | Directory or file | Role |
 | --- | --- |
-| `src/` | React/Vite frontend, routes, shopping UI, and browser WebMCP tools |
-| `server/` | Express/TypeScript backend and API operations |
-| `schema.prisma` | Prisma data model for Neon PostgreSQL |
-| `migrations/` | Versioned production database migrations |
-| `public/` | Frontend product assets |
+| `apps/web/src/` | React/Vite frontend, routes, shopping UI, and browser WebMCP tools |
+| `apps/backend/server/` | Express/TypeScript backend and API operations |
+| `apps/backend/schema.prisma` | Prisma data model for Neon PostgreSQL |
+| `apps/backend/migrations/` | Versioned production database migrations |
+| `apps/web/public/` | Frontend product assets |
 | `.devcontainer/` | Codespaces development configuration |
 
 The ignored `.wasp/`, `dist/`, and `node_modules/` directories are generated
 local output. Wasp is not part of the current runtime or deployment.
 
 See [`docs/architecture.md`](docs/architecture.md) for the request flow and
-the reason the frontend source remains under `src/`.
+the reason the frontend source lives under `apps/web/src/`.
 
 ## Local development
 
@@ -73,8 +73,8 @@ Run the project with Node 24.14.1 or newer and a PostgreSQL database.
 
 ```bash
 npm install
-npx prisma generate
-npx prisma migrate deploy
+npm run db:generate
+npm run db:migrate
 npm run build:server
 npm run build:client
 npm run start:server

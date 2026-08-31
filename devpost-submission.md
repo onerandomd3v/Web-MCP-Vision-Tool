@@ -35,7 +35,7 @@ Codex helped preserve the existing commerce tools, design bounded schemas, imple
 
 ## Architecture
 
-One source repository contains a React/Vite client and Express/Node API. `src/webmcp/` owns tool schemas and deterministic result shaping. The release topology is a Vercel client, a Railway Node API, and Neon Postgres.
+One source repository contains a React/Vite client and Express/Node API. `apps/web/src/webmcp/` owns tool schemas and deterministic result shaping, while `apps/backend/server/` owns the API runtime and `apps/backend/` contains Prisma persistence. The release topology is a Vercel client, a Railway Node API, and Neon Postgres.
 
 ## Testing Instructions
 

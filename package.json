@@ -34,10 +34,12 @@
     "vitest": "^4.1.9"
   },
   "scripts": {
-    "build:client": "vite build",
+    "build:client": "vite build --config apps/web/vite.config.ts",
     "build:server": "tsc -p tsconfig.server.json",
-    "dev": "vite",
-    "start:server": "node dist/server/index.js",
+    "dev": "vite --config apps/web/vite.config.ts",
+    "start:server": "node dist/apps/backend/server/index.js",
+    "db:generate": "prisma generate --schema apps/backend/schema.prisma",
+    "db:migrate": "prisma migrate deploy --schema apps/backend/schema.prisma",
     "test": "vitest run"
   }
 }
