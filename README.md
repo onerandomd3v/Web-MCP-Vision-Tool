@@ -4,7 +4,7 @@ WebMCP Vision Tool is an agent-ready shopping experience for visual product deci
 
 ## Live release
 
-- Client: [webmcp-vision.vercel.app](https://webmcp-vision.vercel.app/)
+- Client: [webmcp-vision-tool.vercel.app](https://webmcp-vision-tool.vercel.app/)
 - API: [webmcp-vision-server-v5-production.up.railway.app](https://webmcp-vision-server-v5-production.up.railway.app/)
 - Source: [onerandomd3v/Web-MCP-Vision-Tool](https://github.com/onerandomd3v/Web-MCP-Vision-Tool)
 

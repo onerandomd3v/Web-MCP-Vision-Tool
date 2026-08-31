@@ -17,6 +17,8 @@ The WebMCP Challenge submission deadline is **September 3, 2026 at 1:00 PM Pacif
 - [x] Confirm the catalog loads and the public routes behave as expected.
 - [x] Confirm the WebMCP inspector lists the structured tools and five vision tools.
 
+Verified production client: https://webmcp-vision-tool.vercel.app/.
+
 The inspector check was completed against the deployed public origin on August
 30, 2026. It showed the structured catalog tools and the five vision tools;
 authentication, cart, coupon, and checkout tools remained gated until login.
