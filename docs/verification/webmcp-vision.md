@@ -46,6 +46,11 @@ Direct navigation to `/compare` and `/product/lelit-bianca-v3` also loaded the
 React routes successfully after the Vercel history fallback was added. The
 product image proxy returned HTTP 200 with `image/jpeg` for the Bianca image.
 
+The Railway API returned HTTP 401 with `Not authenticated.` for
+`GET /api/auth/me` without a session, while the public Bianca product detail
+returned HTTP 200 and included its image reference. This confirms the public
+catalog/auth boundary without creating or transmitting credentials.
+
 Live recheck on 2026-08-31 confirmed the same state after the architecture
 documentation release: the root client returned HTTP 200, the `/compare` route
 rendered its empty-state UI, and the inspector showed `7 of 20 registered`.
