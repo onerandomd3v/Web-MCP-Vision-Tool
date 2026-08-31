@@ -15,7 +15,7 @@ Set these as deployment secrets, never in Git:
 Run production migrations explicitly against the target database after reviewing the migration. Use Prisma's deploy command as a release step, with `DATABASE_URL` pointed at Neon:
 
 ```bash
-npx prisma migrate deploy
+npm run db:migrate
 ```
 
 ## Hosting shape
@@ -37,7 +37,7 @@ The Railway release applies pending Neon migrations and starts the API on port
 ## Railway server configuration
 
 The repository includes `railway.toml` for the API service. It builds the
-TypeScript server, runs production Prisma migrations, and starts `dist/server/index.js`.
+TypeScript server, runs production Prisma migrations, and starts `dist/apps/backend/server/index.js`.
 After linking the `dev` branch, set `DATABASE_URL`, `JWT_SECRET`,
 `WEB_CLIENT_URL`, and `PORT` as Railway variables, then
 trigger a deployment. Keep the client deployment separate and point its API
@@ -55,6 +55,6 @@ VITE_API_URL=https://api.example.com npm run build:client
 
 The equivalent repository script is `VITE_API_URL=https://api.example.com npm run build:client`.
 
-The client output is `dist/`. Configure Vercel to serve that directory.
+The client output is `apps/web/dist/`. Vercel is configured to serve that directory.
 
 Before release, verify catalog reads, authentication, cart actions, image URLs, and all WebMCP registrations against the deployed origin. User photos stay in the agent chat and are never uploaded to this website. Do not expose the development database in production.

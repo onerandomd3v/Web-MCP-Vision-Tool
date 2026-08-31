@@ -1,8 +1,10 @@
 {
+  "buildCommand": "npm run build:client",
+  "outputDirectory": "apps/web/dist",
   "rewrites": [
     {
       "source": "/img/products/:path*",
-      "destination": "https://raw.githubusercontent.com/onerandomd3v/Web-MCP-Vision-Tool/main/public/img/products/:path*"
+      "destination": "https://raw.githubusercontent.com/onerandomd3v/Web-MCP-Vision-Tool/main/apps/web/public/img/products/:path*"
     },
     {
       "source": "/(.*)",

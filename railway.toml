@@ -1,8 +1,8 @@
 [build]
 builder = "RAILPACK"
-buildCommand = "npm install && npx prisma generate && npm run build:server && npm run build:client"
+buildCommand = "npm install && npm run db:generate && npm run build:server && npm run build:client"
 
 [deploy]
-startCommand = "npx prisma migrate deploy && npm run start:server"
+startCommand = "npm run db:migrate && npm run start:server"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 5
