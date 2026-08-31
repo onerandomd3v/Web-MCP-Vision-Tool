@@ -1,26 +1,28 @@
 # WebMCP Vision Verification
 
-Run the app in the Codespace with `wasp start`, forward port 3000, and open the forwarded client URL. The development Vite config proxies `/operations`, `/auth`, `/api`, `/file`, and `/upload` to the private Wasp server on port 3001. Set `REACT_APP_API_URL` in the local client environment to the forwarded client origin; never commit environment files or server URLs.
+Run the app in the Codespace with the Vite client and Express API, forward port
+3000, and open the forwarded client URL. The development Vite config proxies
+`/api` to the private API on port 3001. Leave `VITE_API_URL` unset for local
+development so requests remain same-origin; never commit environment files or
+secrets.
 
 ## Environment gate
 
-- `wasp doctor` reports Wasp 0.25, Node 24.14.1 or newer, Docker running, and free ports.
-- `wasp db migrate-dev` reports the database is in sync.
-- `wasp compile` succeeds.
+- Node 24.14.1 or newer is installed and PostgreSQL is reachable.
+- `npx prisma migrate deploy` reports the database is in sync.
+- `npm run build:client` and `npm run build:server` succeed.
 - `npm test` succeeds.
 
 ## Recorded Codespace baseline
 
-On 2026-08-30 in the `dev` Codespace, the client returned HTTP 200 on port 3000,
-the generated server returned HTTP 200 on port 3001, and
-`POST /operations/get-products` returned HTTP 200 in approximately 0.16 seconds.
-Codespaces exposed private HTTPS forwards for ports 3000 and 3001. This confirms
-the Wasp runtime and operation path; it is not a substitute for the public-origin
-Chrome WebMCP inspection below.
+On 2026-08-30 in the `dev` Codespace, the client returned HTTP 200 on port 3000
+and the API returned HTTP 200 on port 3001. Codespaces exposed private HTTPS
+forwards for ports 3000 and 3001. This confirms the local client/API path; it
+is not a substitute for the public-origin Chrome WebMCP inspection below.
 
 After the same-origin proxy was added, a direct Codespace smoke test on the
 development branch returned HTTP 200 for the client and HTTP 200 for
-`POST /operations/get-products` through the client origin. This removes the
+`GET /api/products` through the client origin. This removes the
 browser `localhost:3001` failure while keeping the server port private. It is
 still a development preview, not a production deployment.
 

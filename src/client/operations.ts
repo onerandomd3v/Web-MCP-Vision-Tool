@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 
-const API_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, "") ?? "";
+// Hosted builds use the Railway API. During Vite development, an unset API URL
+// must stay same-origin so Codespaces can use the local /api proxy instead of
+// trying to call localhost:3001 from the browser.
+const configuredApiUrl = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, "");
+const API_URL = configuredApiUrl ?? (
+  import.meta.env.DEV ? "" : "https://webmcp-vision-server-v5-production.up.railway.app"
+);
 
 export type OperationName =
   | "getProducts" | "getProduct" | "compareProducts" | "getMyGear"
@@ -47,7 +53,7 @@ function endpoint(operation: OperationName, args: Record<string, unknown> | unde
 }
 
 async function request<T>(operation: OperationName, args?: Record<string, unknown>): Promise<T> {
-  const method = operation === getProducts || operation === getProduct ? "GET" : "POST";
+  const method = operation === "getProducts" || operation === "getProduct" ? "GET" : "POST";
   const response = await fetch(`${API_URL}${endpoint(operation, args)}`, {
     method,
     credentials: "include",
