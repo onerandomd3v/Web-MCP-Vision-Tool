@@ -47,6 +47,26 @@ Vision results are bounded and deterministic. Product IDs are validated, duplica
 
 This is one application repository with a React/Vite browser client and an Express/TypeScript API. The two deploy independently without maintaining separate codebases.
 
+## Repository layout
+
+The monorepo keeps the two runtime boundaries visible without duplicating the
+project:
+
+| Directory or file | Role |
+| --- | --- |
+| `src/` | React/Vite frontend, routes, shopping UI, and browser WebMCP tools |
+| `server/` | Express/TypeScript backend and API operations |
+| `schema.prisma` | Prisma data model for Neon PostgreSQL |
+| `migrations/` | Versioned production database migrations |
+| `public/` | Frontend product assets |
+| `.devcontainer/` | Codespaces development configuration |
+
+The ignored `.wasp/`, `dist/`, and `node_modules/` directories are generated
+local output. Wasp is not part of the current runtime or deployment.
+
+See [`docs/architecture.md`](docs/architecture.md) for the request flow and
+the reason the frontend source remains under `src/`.
+
 ## Local development
 
 Run the project with Node 24.14.1 or newer and a PostgreSQL database.
