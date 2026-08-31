@@ -55,16 +55,6 @@ export function selectVisionProducts<T extends VisionProduct>(
   });
 }
 
-export function buildPhotoMatchResult(
-  photoUrl: unknown,
-  candidates: ProductImageResult[],
-) {
-  if (typeof photoUrl !== "string" || photoUrl.trim() === "") {
-    throw new Error("A photo URL is required for visual matching.");
-  }
-  return { userPhoto: photoUrl, candidates };
-}
-
 export function buildBestFitContext(
   candidates: ProductImageResult[],
   userPreference: unknown,

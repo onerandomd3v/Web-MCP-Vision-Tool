@@ -1,10 +1,15 @@
 # WebMCP Vision Tool Implementation Plan
 
+> **Architecture correction (2026-08-31):** This historical plan is retained
+> for context, but its website photo-upload and `matchToUserPhoto` steps are
+> superseded. The current implementation keeps user photos in the agent chat
+> and exposes only product image data from the website.
+
 > **For agentic workers:** Implement this plan task-by-task with a fresh verification checkpoint after each task.
 
 **Goal:** Deliver a vision-augmented WebMCP shopping experience where structured tools handle routine commerce and targeted image tools support visual judgments.
 
-**Architecture:** Use one repository with a React/Vite client and an Express/TypeScript API backed by Prisma/Postgres. Keep the existing structured WebMCP tools and add a focused vision module that returns product image URLs and user-photo references on demand; the agent’s multimodal model performs visual reasoning. The browser upload flow uses a temporary object URL without putting image bytes into WebMCP schemas or exposing secrets.
+**Architecture:** Use one repository with a React/Vite client and an Express/TypeScript API backed by Prisma/Postgres. Keep the existing structured WebMCP tools and add a focused vision module that returns product image URLs on demand; the agent’s multimodal model performs visual reasoning. The website never receives personal photos.
 
 **Tech Stack:** React, TypeScript, Vite, Express, Prisma/Postgres, `use-webmcp-tool`, Vitest, Neon, Railway, and Vercel.
 
@@ -73,22 +78,20 @@
 - [x] Keep the existing specification comparison tool unchanged and make the visual tool descriptions clearly distinguish image judgment from specs.
 - [x] Run focused tests and client/server builds (covered by the passing GitHub Actions CI run); manual WebMCP inspection remains in Task 7.
 
-### Task 4: Build the user-photo upload and `matchToUserPhoto` flow
+### Task 4: Build the user-photo upload and `matchToUserPhoto` flow (superseded)
+
+This task is intentionally not implemented. A user photo is supplied directly
+in the agent conversation; the website does not receive it and no site-side
+matching tool or upload UI is needed.
 
 **Files:**
-- Create: `src/vision/UserPhotoPanel.tsx` for file selection, preview, validation, and removal.
-- Create: `src/vision/userPhoto.ts` for client-side object URL lifecycle and upload-result typing.
-- Modify: `src/App.tsx` or the catalog page to render the panel without disrupting shopping routes.
-- Modify: `src/webmcp/schemas.ts` and `src/webmcp/WebMCPTools.tsx` to register `matchToUserPhoto`.
-- Create: `src/webmcp/userPhotoTools.test.ts`.
+- None. The former upload and matching files were removed.
 
 **Interfaces:**
-- Consumes: a validated user photo URL and optional product category.
-- Produces: `{ userPhoto, candidates }`, where candidates are bounded product image references from the existing catalog.
+- Consumes: no user photo on the website.
+- Produces: product image references through the remaining data-only vision tools.
 
-- [x] Test file type/size rejection, successful preview, cleanup after removal, and no-photo tool errors.
-- [x] Start with a temporary browser object URL for the local demo; isolate a future storage adapter so deployment storage can be added without changing the tool contract.
-- [x] Add clear consent and removal copy; do not persist or transmit a photo until the user explicitly selects it.
+- [x] Keep user-photo handling entirely in the agent chat; the website does not persist or transmit personal photos.
 - [x] Limit candidate count and reuse existing catalog filtering rather than duplicating product data.
 - [x] Run client/server builds and Vitest (covered by the passing GitHub Actions CI run); browser upload smoke test remains in Task 7.
 
@@ -118,7 +121,7 @@
 - Modify: `public/favicon.ico` or add a new project-owned favicon asset only if the branding asset is available.
 
 **Interfaces:**
-- Consumes: completed vision tools and upload panel.
+- Consumes: completed data-only vision tools.
 - Produces: a coherent product experience that explains when image tools are used without encouraging screenshots for routine actions.
 
 - [x] Remove remaining Crema/espresso-specific product-facing branding only after the tool flow works.
@@ -142,7 +145,7 @@
 - [ ] Enable the Chrome WebMCP testing flag and confirm tools appear in the Model Context Tool Inspector.
 - [ ] Test the prompt “Which two machines look better for a minimalist white kitchen?” and confirm image tools are called only after product discovery.
 - [ ] Test a spec-only prompt and confirm no image tool is called.
-- [ ] Test upload matching, side-by-side comparison, visual difference, and the safety rule that checkout is never called without explicit user instruction.
+- [ ] Test side-by-side comparison, visual difference, agent-side photo comparison, and the safety rule that checkout is never called without explicit user instruction.
 - [ ] Capture latency/token observations against a full-page screenshot fallback and record them in the verification document.
 
 > Automated verification evidence: GitHub Actions run `33282753946` passed the client/server build, PostgreSQL setup, migrations, and `npm test` on Ubuntu with Node 24.14.1.
@@ -161,15 +164,15 @@
 
 - [ ] Configure Neon only through deployment secrets; keep local development DB separate.
 - [ ] Deploy the Vite client and Express server using the selected hosting path, then run production migrations explicitly.
-- [ ] Verify authenticated routes, catalog, image URLs, upload flow, and WebMCP tools against the deployed origin.
-- [ ] Record a two-to-three-minute demo: structured search, visual comparison, user-photo match, recommendation rationale, and optional cart action.
+- [ ] Verify authenticated routes, catalog, image URLs, and WebMCP tools against the deployed origin.
+- [ ] Record a two-to-three-minute demo: structured search, visual comparison against a photo shared in the agent chat, recommendation rationale, and optional cart action.
 - [ ] Prepare Devpost description, architecture explanation, repository link, deployed link, and video; confirm the submission deadline and challenge requirements before submitting.
 - [ ] Merge the feature branch into `dev`, then promote the tested release to `main` through the protected PR flow.
 
 ## Self-review checklist
 
 - Every vision tool has a bounded schema, deterministic server result, and a focused test.
-- The upload flow has explicit user consent, cleanup, and no committed secrets.
+- User photos remain in the agent chat; no website upload flow or committed secrets exist.
 - Existing WebMCP commerce tools remain intact and checkout is never called implicitly.
 - Local Codespaces routing and deployed client/server URLs are documented separately.
 - The README and demo show the tiered pattern rather than presenting this as a new WebMCP protocol.

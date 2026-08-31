@@ -2,11 +2,9 @@ import { describe, expect, it } from "vitest";
 import {
   assertBoundedProductIds,
   buildBestFitContext,
-  buildPhotoMatchResult,
   selectVisionProducts,
   toProductImageResult,
 } from "./visionTools";
-import { matchToUserPhotoSchema } from "./schemas";
 
 describe("toProductImageResult", () => {
   it("returns a targeted image reference without extra product data", () => {
@@ -61,19 +59,12 @@ describe("vision result composition", () => {
     );
   });
 
-  it("builds photo and preference contexts without claiming server-side vision", () => {
+  it("builds preference context without claiming server-side vision", () => {
     const candidate = [toProductImageResult(products[0])];
-    expect(buildPhotoMatchResult("blob:photo", candidate)).toEqual({
-      userPhoto: "blob:photo",
-      candidates: candidate,
-    });
     expect(buildBestFitContext(candidate, "sleek and black")).toMatchObject({
       preference: "sleek and black",
       recommendationPrompt: expect.stringContaining("sleek and black"),
     });
-    expect(() => buildPhotoMatchResult("", candidate)).toThrow();
-    expect(() => buildPhotoMatchResult(undefined, candidate)).toThrow();
     expect(() => buildBestFitContext(candidate, " ")).toThrow();
-    expect("required" in matchToUserPhotoSchema).toBe(false);
   });
 });

@@ -26,7 +26,6 @@ import { celebrateOrder } from "../cart/celebrate";
 import { useHighlightStore } from "../compare/highlightStore";
 import { navigateRef } from "../navigation";
 import { MACHINE_SPEC_KEY_NAMES } from "../shared/machineSpecKeys";
-import { getUserPhotoUrl } from "../vision/userPhoto";
 import {
   addToCartSchema,
   applyCouponSchema,
@@ -38,7 +37,6 @@ import {
   getProductImageSchema,
   highlightDifferencesSchema,
   highlightVisualDifferenceSchema,
-  matchToUserPhotoSchema,
   pickBestFitSchema,
   removeFromCartSchema,
   searchProductsSchema,
@@ -47,7 +45,6 @@ import {
 } from "./schemas";
 import {
   buildBestFitContext,
-  buildPhotoMatchResult,
   selectVisionProducts,
   toProductImageResult,
 } from "./visionTools";
@@ -79,7 +76,6 @@ const TOOL_META: Array<{ name: string; auth: boolean; writes: boolean }> = [
   { name: "get_product_details", auth: false, writes: false },
   { name: "getProductImage", auth: false, writes: false },
   { name: "compareProductAesthetics", auth: false, writes: false },
-  { name: "matchToUserPhoto", auth: false, writes: false },
   { name: "highlightVisualDifference", auth: false, writes: false },
   { name: "pickBestFit", auth: false, writes: false },
   { name: "compare_products", auth: false, writes: false },
@@ -154,21 +150,6 @@ export function WebMCPTools() {
       execute: async (args: { productIds: string[] }) => {
         const products = await getProducts({});
         return selectVisionProducts(products, args.productIds);
-      },
-    }),
-
-    useWebMCP({
-      name: "matchToUserPhoto",
-      description:
-        "Return product images alongside a user-provided photo URL so a multimodal agent can judge visual fit. The tool supplies context; it does not perform image reasoning itself.",
-      inputSchema: matchToUserPhotoSchema,
-      annotations: readOnly,
-      execute: async (args: { photoUrl?: string; category?: string }) => {
-        const products = await getProducts(args.category ? { category: args.category } : {});
-        return buildPhotoMatchResult(
-          args.photoUrl ?? getUserPhotoUrl(),
-          selectVisionProducts(products, products.slice(0, 3).map((p) => p.slug), 1, 3),
-        );
       },
     }),
 
