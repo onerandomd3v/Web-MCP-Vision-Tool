@@ -10,7 +10,7 @@ Shopping agents can reliably search product data, but questions such as “which
 
 ## Solution
 
-WebMCP Vision exposes two deliberate tool tiers. Structured tools handle catalog discovery, specifications, compatibility, cart actions, and checkout. Five vision tools return only bounded product-image references (and, when explicitly selected, a temporary browser photo URL) so a multimodal agent can make a visual judgment without pretending the server is an image model.
+WebMCP Vision exposes two deliberate tool tiers. Structured tools handle catalog discovery, specifications, compatibility, cart actions, and checkout. Four vision tools return only bounded product-image references so a multimodal agent can make a visual judgment without pretending the server is an image model. A user photo stays in the agent chat and is never uploaded to the website.
 
 ## Why This Matters
 
@@ -18,24 +18,24 @@ People and agents can collaborate on a decision that was previously difficult to
 
 ## How We Used AI
 
-The multimodal agent performs the visual reasoning over the targeted URLs returned by `getProductImage`, `compareProductAesthetics`, `highlightVisualDifference`, `matchToUserPhoto`, and `pickBestFit`. WebMCP remains the action and data contract; the server returns deterministic references and never claims to classify an image itself.
+The multimodal agent performs the visual reasoning over the targeted URLs returned by `getProductImage`, `compareProductAesthetics`, `highlightVisualDifference`, and `pickBestFit`. WebMCP remains the action and data contract; the server returns deterministic references and never claims to classify an image itself.
 
 ## How We Used Codex
 
-Codex helped preserve the existing commerce tools, design bounded schemas, implement the React upload flow, write focused Vitest coverage, configure the Express/Prisma API, debug Codespaces routing, and prepare the verification and demo documentation. Changes were developed on feature branches and merged into protected `dev` through pull requests.
+Codex helped preserve the existing commerce tools, design bounded schemas, implement the data-only visual tools, write focused Vitest coverage, configure the Express/Prisma API, debug Codespaces routing, and prepare the verification and demo documentation. Changes were developed on feature branches and merged into protected `dev` through pull requests.
 
 ## Key Features
 
 - Structured product search and details remain the default path.
 - Targeted image retrieval and deterministic 2–3 product visual comparisons.
-- User-photo preview, replacement, removal, type/size validation, and session-only object URLs.
+- Agent-side photo comparison: users can share a photo directly in their agent chat while the site supplies only product image URLs.
 - Preference-based best-fit context for a multimodal agent.
 - Explicit checkout guard: checkout is never called without a direct user request.
 - Accessible visual entry point and documented Codespaces setup.
 
 ## Architecture
 
-One source repository contains a React/Vite client and Express/Node API. `src/webmcp/` owns tool schemas and deterministic result shaping; `src/vision/` owns the temporary browser photo lifecycle. The release topology is a Vercel client, a Railway Node API, and Neon Postgres.
+One source repository contains a React/Vite client and Express/Node API. `src/webmcp/` owns tool schemas and deterministic result shaping. The release topology is a Vercel client, a Railway Node API, and Neon Postgres.
 
 ## Testing Instructions
 
@@ -77,11 +77,11 @@ TODO: record and publish a public YouTube video under three minutes. The shot-by
 
 ## Screenshot Shot List
 
-1. Catalog page showing the “Shop by how it looks” photo panel.
-2. WebMCP tool inspector showing structured tools and the five vision tools.
+1. Catalog page showing the visual-tools concept and product catalog.
+2. WebMCP tool inspector showing structured tools and the four vision tools.
 3. Structured product search followed by targeted image retrieval.
 4. Side-by-side visual comparison and recommendation rationale.
-5. Photo-match preview with the remove-photo control visible.
+5. Agent chat showing a user-provided photo compared with returned product images.
 
 ## Submission Readiness Notes
 
@@ -94,9 +94,9 @@ TODO: record and publish a public YouTube video under three minutes. The shot-by
 
 ## Known Limitations
 
-- User photos currently use browser object URLs and are not persisted or uploaded to a storage provider.
+- The website never receives user photos; photo comparison happens in the agent conversation.
 - The deployed public origin was checked in the WebMCP inspector: structured
-  catalog tools and all five vision tools were listed; account-only commerce
+  catalog tools and all four vision tools were listed; account-only commerce
   tools remained gated until login.
 - Production deployment and the initial Neon migration have been completed; future schema changes still require an explicit production migration.
 - The catalog is currently espresso-oriented, while the product experience and WebMCP vision layer are branded WebMCP Vision.

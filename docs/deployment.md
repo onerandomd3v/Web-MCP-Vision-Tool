@@ -57,4 +57,4 @@ The equivalent repository script is `VITE_API_URL=https://api.example.com npm ru
 
 The client output is `dist/`. Configure Vercel to serve that directory.
 
-Before release, verify catalog reads, authentication, cart actions, image URLs, upload behavior, and all WebMCP registrations against the deployed origin. Do not expose the development database or temporary browser object URLs in production.
+Before release, verify catalog reads, authentication, cart actions, image URLs, and all WebMCP registrations against the deployed origin. User photos stay in the agent chat and are never uploaded to this website. Do not expose the development database in production.

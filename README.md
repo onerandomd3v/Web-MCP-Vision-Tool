@@ -12,7 +12,7 @@ The client and server are deployed from the tested release on `main`. The server
 
 ## The experience
 
-Shoppers can search the catalog, inspect product details, compare specifications, evaluate appearance, match products to a room photo, and add products to a cart. The application uses two complementary tool layers:
+Shoppers can search the catalog, inspect product details, compare specifications, evaluate appearance, and add products to a cart. The application uses two complementary tool layers:
 
 - Structured tools handle discovery, filtering, product details, compatibility, cart actions, coupons, and checkout.
 - Vision tools provide bounded product-image references when a request needs a visual judgment about finish, color, shape, or style.
@@ -26,16 +26,15 @@ The application supplies product data and image references. A multimodal agent p
 | `getProductImage` | Return one product image and its metadata for visual evaluation. |
 | `compareProductAesthetics` | Return an ordered set of product images for side-by-side comparison. |
 | `highlightVisualDifference` | Return the assets needed to explain visual differences between products. |
-| `matchToUserPhoto` | Return catalog candidates that can be compared with a shopper photo. |
 | `pickBestFit` | Provide candidate images and preference context for a visual recommendation. |
 
-Vision results are bounded and deterministic. Product IDs are validated, duplicate candidates are removed, and missing images are reported instead of silently substituted. Image bytes, credentials, and uploaded photos are never placed in WebMCP tool schemas.
+Vision results are bounded and deterministic. Product IDs are validated, duplicate candidates are removed, and missing images are reported instead of silently substituted. The site returns product image URLs only; the agent's native vision compares them with any photo the user shares directly in chat.
 
 ## Shopper flow
 
 1. Use structured search to narrow the catalog.
 2. Request product images only when the question requires visual judgment.
-3. Optionally select a local JPG, PNG, or WebP room photo. The browser keeps a temporary object URL until the shopper removes it or leaves the page.
+3. If visual context is needed, share a photo directly with the agent in chat; the website does not receive personal photos.
 4. Compare the returned references and explain the trade-offs.
 5. Add an item to the cart only when the shopper asks. Checkout is never invoked implicitly.
 
@@ -61,7 +60,7 @@ npm run build:client
 npm run start:server
 ```
 
-The client runs on port `3000` and the server on port `3001`. In Codespaces, the development proxy keeps browser requests same-origin. Keep `.env` files, database URLs, API keys, and uploaded photos out of Git.
+The client runs on port `3000` and the server on port `3001`. In Codespaces, the development proxy keeps browser requests same-origin. Keep `.env` files, database URLs, and API keys out of Git.
 
 ## Verification
 
